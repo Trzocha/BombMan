@@ -12,8 +12,8 @@ VAR = {
 	scale:2,// elementy gry będą wklejane w odpowiedniej skali
 	//
 	lastTime:0,
-    enemy:3,
-    crate:1,
+    enemy:0,
+    crate:3,
     
 	rand:function(min,max){
 		return Math.floor(Math.random()*(max-min+1))+min;
@@ -58,7 +58,15 @@ Game = {
         var tmp_enemy;
         for(var i=0;i<VAR.enemy;i++){
             tmp_enemy = Game.board.getEmptySpace();
-            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH);
+            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'cebula');
+        }
+        for(var i=0;i<VAR.enemy;i++){
+            tmp_enemy = Game.board.getEmptySpace();
+            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'balonik');
+        }
+        for(var i=0;i<VAR.enemy;i++){
+            tmp_enemy = Game.board.getEmptySpace();
+            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'kurczak');
         }
         
         window.addEventListener('keydown',Game.onKey,false);

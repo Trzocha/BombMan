@@ -95,6 +95,7 @@ Character.prototype.draw = function(){ //metoda
 //                     Game.board.fH*VAR.scale);
     
     if(Game.board.b[this.row][this.column].sub_type== 'bomb' &&Game.board.b[this.row][this.column].bum_type){
+        console.log("SetKO");
         this.setKO();
     }
       
@@ -117,16 +118,17 @@ Character.prototype.draw = function(){ //metoda
     if(this.states[this.state].flip){ //jezeli odbijamy lustrzanie obrazek to przywracamy go do pkt poczatkowego, zapisanego przez save
         Game.ctx.restore();
     }
-    if(this.change_f_delay < this.f_max_delay){ //sztuczne opoznianie animacji
+    
+    if(this.change_f_delay <= this.f_max_delay){ //sztuczne opoznianie animacji
         this.change_f_delay++;
     }else{
         this.change_f_delay =0;
         
-        if(this.state == 'ko' && this.current_f == this.states[this.state].f.length-1){
+        if(this.state == 'ko' && this.current_f == this.states[this.state].f.length-1){ //blad usuwania enemy
             this.afterKO();
         }else{
-        
-        this.current_f =this.current_f+1>= this.states[this.state].f.length ? 0 : this.current_f+1;
+            this.current_f =this.current_f+1>= this.states[this.state].f.length ? 0 : this.current_f+1;
+           //console.log("OXA");
         }
     }
 };
@@ -134,6 +136,7 @@ Character.prototype.setKO = function(){
     this.state = 'ko';
 };
 Character.prototype.afterKO = function(){
+    console.log(this.id);
     delete Game.toDraw[this.id];
 };
 
@@ -211,25 +214,52 @@ Hero.prototype.draw = function(){
 Enemy.all = {
     
 };
-function Enemy(x,y){
+function Enemy(x,y,name){
     Character.call(this);
     Enemy.all[this.id] = this;
     this.state = 'down_go';
-    this.states = {
-        'down':{sx:0,sy:72,f:[0]},
-        'down_go':{sx:0,sy:72,f:[1,0,2,0]},
-        'up':{sx:63,sy:72,f:[0]},
-        'up_go':{sx:63,sy:72,f:[1,0,2,0]},
-        //'left':{sx:63,sy:24,f:[0]},         //kurczak
-        //'left_go':{sx:63,sy:24,f:[1,0,2,0]},
-        'left':{sx:0,sy:144,f:[0]},
-        'left_go':{sx:0,sy:144,f:[1,0,2,0,3,0,4,0,5,0]},
-        'right':{sx:63,sy:24,f:[0],flip:true},
-        'right_go':{sx:63,sy:24,f:[1,0,2,0],flip:true},
-//        'ko':{sx:0,sy:96,f:[0,1,1,2,2,3,4,5]}   //kurczak
-         'ko':{sx:0,sy:96,f:[0,1,1,2,2,3,4,5]}
-    }
-    this.name = 'enemy';
+    
+    switch(name){
+           case 'kurczak':
+            this.states = {
+                'down':{sx:0,sy:72,f:[0]},
+                'down_go':{sx:0,sy:72,f:[1,0,2,0]},
+                'up':{sx:63,sy:72,f:[0]},
+                'up_go':{sx:63,sy:72,f:[1,0,2,0]},
+                'left':{sx:63,sy:24,f:[0]},         
+                'left_go':{sx:63,sy:24,f:[1,0,2,0]},
+                'right':{sx:63,sy:24,f:[0],flip:true},
+                'right_go':{sx:63,sy:24,f:[1,0,2,0],flip:true},
+                'ko':{sx:0,sy:120,f:[0,0,0,5,5,6,7,8]}
+                    }
+                break;
+           case 'balonik':
+            this.states = {
+                'down':{sx:0,sy:96,f:[0]},
+                'down_go':{sx:0,sy:96,f:[1,2,3,4,5]},
+                'up':{sx:0,sy:96,f:[0]},
+                'up_go':{sx:0,sy:96,f:[5,4,3,2,1]},
+                'left':{sx:0,sy:96,f:[0]},         
+                'left_go':{sx:0,sy:96,f:[1,2,3,4,5]},
+                'right':{sx:0,sy:96,f:[0]},
+                'right_go':{sx:0,sy:96,f:[5,4,3,2,1]},
+                'ko':{sx:21,sy:120,f:[0,0,0,4,4,5,6,7]}
+                    }
+                break;
+            case 'cebula':
+                this.states = {
+                    'down':{sx:0,sy:144,f:[0]},
+                    'down_go':{sx:0,sy:144,f:[1,2,3,4,5]},
+                    'up':{sx:0,sy:144,f:[0]},
+                    'up_go':{sx:0,sy:144,f:[5,4,3,2,1]},
+                    'left':{sx:0,sy:144,f:[0]},         
+                    'left_go':{sx:0,sy:144,f:[1,2,3,4,5]},
+                    'right':{sx:0,sy:144,f:[0]},
+                    'right_go':{sx:0,sy:144,f:[5,4,3,2,1]},
+                    'ko':{sx:42,sy:120,f:[0,0,0,3,3,4,5,6]}
+                        }
+                break;
+           }
     this.x = x;
     this.y = y;
     this.rowAndColumn();
@@ -271,21 +301,22 @@ Enemy.prototype.setDirectionLogic = function(){
              }
          }
     }
-    if(this.canGo.length>0){
-        this.tmp_pos = this.canGo[VAR.rand(0,this.canGo.length-1)];
-        if(this.column<this.tmp_pos.x){
-            this.state = 'right_go';
-        }else if(this.column >this.tmp_pos.x){
-            this.state = 'left_go';
-        }else if(this.row < this.tmp_pos.y){
-             this.state = 'down_go';
-        }else if(this.row > this.tmp_pos.y){
-            this.state = 'up_go';
+    if(this.state !='ko'){
+        if(this.canGo.length>0){
+            this.tmp_pos = this.canGo[VAR.rand(0,this.canGo.length-1)];
+            if(this.column<this.tmp_pos.x){
+                this.state = 'right_go';
+            }else if(this.column >this.tmp_pos.x){
+                this.state = 'left_go';
+            }else if(this.row < this.tmp_pos.y){
+                 this.state = 'down_go';
+            }else if(this.row > this.tmp_pos.y){
+                this.state = 'up_go';
+            }
+        }else if(this.state.slice(-2)=='go'){
+            this.state = this.state.slice(0,-3);  
         }
-    }else if(this.state.slice(-2)=='go'){
-        this.state = this.state.slice(0,-3);  
     }
-
 };
 Enemy.prototype.rowAndColumn = function(){
     this.prev_state = this.state;

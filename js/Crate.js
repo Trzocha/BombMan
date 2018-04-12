@@ -30,10 +30,13 @@ Crate.prototype.draw = function(){
     this.current_f++;
     
     if(this.current_f>=this.f.length){
-        if(this.row == Game.board.array_Crate[0].y && this.column == Game.board.array_Crate[0].x){
-            Game.board.b[this.row][this.column] = Board.elements.bonus; 
-        }else{
-           Game.board.b[this.row][this.column] = Board.elements.floor; 
+        for(var i=0;i<2;i++){
+            if(this.row == Game.board.array_Crate[i].y && this.column == Game.board.array_Crate[i].x){
+                Game.board.b[this.row][this.column] = Game.board.array_Bonus[i];            //pokazanie bonusu
+                break;
+            }else{
+               Game.board.b[this.row][this.column] = Board.elements.floor; 
+            }
         }
     }
 }

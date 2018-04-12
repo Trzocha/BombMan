@@ -30,7 +30,7 @@ function Bomb(column,row,bum_type){
         this.bomb_sx = 126;
         this.bomb_sy = 16;
         
-        this.f = [0,0,1,1,2,2];
+        this.f = [0,0,1,1,2,2,2];
         
         this.current_f = 0;
         
@@ -132,7 +132,7 @@ Bomb.prototype.draw = function(){
         
          if(this.end_bum){              //po zakonczeniu wybuchu jezeli wybuchl bonus dodaje do gry wroga
             this.end_bum = false;
-            new Enemy(this.bonus_y*Game.board.fW,this.bonus_x*Game.board.fH);
+            new Enemy(this.bonus_y*Game.board.fW,this.bonus_x*Game.board.fH,'balonik');
         }
         
     }    
