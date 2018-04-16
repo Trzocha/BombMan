@@ -12,8 +12,9 @@ VAR = {
 	scale:2,// elementy gry będą wklejane w odpowiedniej skali
 	//
 	lastTime:0,
-    enemy:0,
-    crate:3,
+    enemy:3,  //liczna mnozona x3
+    crate:20,
+    bonus:5,
     
 	rand:function(min,max){
 		return Math.floor(Math.random()*(max-min+1))+min;
@@ -57,16 +58,15 @@ Game = {
         
         var tmp_enemy;
         for(var i=0;i<VAR.enemy;i++){
+            //con =0;
             tmp_enemy = Game.board.getEmptySpace();
-            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'cebula');
-        }
-        for(var i=0;i<VAR.enemy;i++){
+            Game.space(tmp_enemy,'cebula');
+            
             tmp_enemy = Game.board.getEmptySpace();
-            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'balonik');
-        }
-        for(var i=0;i<VAR.enemy;i++){
+            Game.space(tmp_enemy,'balonik');
+            
             tmp_enemy = Game.board.getEmptySpace();
-            new Enemy(tmp_enemy.x*Game.board.fW,tmp_enemy.y*Game.board.fH,'kurczak');
+            Game.space(tmp_enemy,'kurczak');
         }
         
         window.addEventListener('keydown',Game.onKey,false);
@@ -75,6 +75,15 @@ Game = {
         // rozpoczęcie pętli gry
 		Game.animationLoop();
 	},
+    space:function(location,name_enemy){ //funkcja sprawdzajaca obszar gdzie mialby pojawic sie enemy, jak obszar jest za blisko enemy wybierany jest nowy
+        if((location.x<=6 && location.y<=1) || (location.x<=1 && location.y<=6) || (location.x<=3 && location.y<=3)){ //niedopuszczalny obszar pojawienia sie na starcie enemy
+            var tmp;
+            tmp =  Game.board.getEmptySpace();
+            Game.space(tmp,name_enemy);
+            }else{
+                new Enemy(location.x*Game.board.fW,location.y*Game.board.fH,name_enemy);
+            }
+    },
     stop:function(){
         window.removeEventListener('keydown',Game.onKey);
         window.removeEventListener('keyup',Game.onKey);
@@ -93,7 +102,7 @@ Game = {
                   }
                   Game.hero.updateState();
               }else {
-                  new Bomb(Game.hero.column,Game.hero.row);    //umieszczanie bomby przez bohatera
+                  Game.bomb = new Bomb(Game.hero.column,Game.hero.row);    //umieszczanie bomby przez bohatera
                   
               }
           }else if(ev.type == 'keyup'){
@@ -122,6 +131,8 @@ Game = {
         Game.ctx.mozImageSmoothingEnabled = false;
         Game.ctx.mozImageSmoothingEnabled = false;
         Game.ctx.webKitImageSmoothingEnabled = false;
+        
+        Game.board.temp_board = false;                    //zmienna pomocnicza aby przy zmianie rozmiaru okna tylko raz narysowac jeszcze raz cala mape
 	},
 	// Funkcja, która odpala się 60 razy na sekundę
 	animationLoop:function(time){

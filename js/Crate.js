@@ -30,7 +30,7 @@ Crate.prototype.draw = function(){
     this.current_f++;
     
     if(this.current_f>=this.f.length){
-        for(var i=0;i<2;i++){
+        for(var i=0;i<VAR.bonus;i++){
             if(this.row == Game.board.array_Crate[i].y && this.column == Game.board.array_Crate[i].x){
                 Game.board.b[this.row][this.column] = Game.board.array_Bonus[i];            //pokazanie bonusu
                 break;

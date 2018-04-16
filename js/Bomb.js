@@ -1,5 +1,6 @@
 Bomb.count = 0;
 Bomb.max_count =2;
+Bomb.range = 2;
 
 Bomb.elements = {
     'bomb':{sx:126,sy:16, f:[0,0,1,1,2,2]},
@@ -38,7 +39,7 @@ function Bomb(column,row,bum_type){
         this.row = row;
          
         this.timer = bum_type ? this.data.f.length : 30;
-        this.range = 2;
+        //this.range = 2;
         
         Game.board.b[this.row][this.column] = this;
     }
@@ -103,7 +104,7 @@ Bomb.prototype.draw = function(){
                 this.tmp_bum_type = 'up_bum';
             }
             
-            for(j=0;j<this.range;j++){
+            for(j=0;j<Bomb.range;j++){
                 this[this.axis] = this[this.axis]+(this.grow ? 1 : -1);
                 if(Game.board.b[this.tmp_row][this.tmp_column].type != 'solid'){
                     if( Game.board.b[this.tmp_row][this.tmp_column].ko_obj){
@@ -117,7 +118,7 @@ Bomb.prototype.draw = function(){
                         
                      }    
                         
-                    new Bomb(this.tmp_column,this.tmp_row,this.tmp_bum_type+(j==this.range-1 ? '_end' : ''));
+                    new Bomb(this.tmp_column,this.tmp_row,this.tmp_bum_type+(j==Bomb.range-1 ? '_end' : ''));
                   
                     }
                 }else if(Game.board.b[this.tmp_row][this.tmp_column].sub_type=='bomb' && !Game.board.b[this.tmp_row][this.tmp_column].bum_type){

@@ -12,6 +12,7 @@ function Character(inheritance){
     this.mod_y = -9;
     this.speed = 2;
     this.timer = 200;   //odliczanie czasu trwania bonusu
+    this.ghost = false;
 
     //
 //    this.frames = [1,0,2,0]; //zapetlanie odpowiednich klatek animacji aby ruch był plynny
@@ -34,7 +35,7 @@ Character.prototype.rowAndColumn = function(){ //metoda sprawdzajaca kolejny obs
         }
         
         
-        if(!(this.row==this.next_row && this.column == this.next_column) && Game.board.b[this.next_row][this.next_column].type !='empty'){ //sprawdzam czy obszar na ktory chce wejsc jest puty i czy nie stoi w miejsc
+        if(!(this.row==this.next_row && this.column == this.next_column) && Game.board.b[this.next_row][this.next_column].type !='empty' && !this.ghost || Game.board.b[this.next_row][this.next_column].special_type =='wall'){ //sprawdzam czy obszar na ktory chce wejsc jest pusty i czy nie stoi w miejsc  (bonus ghost mozna przechodzic przez skrzynki i kamienie ale przez mur nie)
                 this.state = this.state.slice(0,-3);
                 this.current_f = 0;  //ustawienie klatki animacji na pierwsza
             
@@ -56,18 +57,35 @@ Character.prototype.rowAndColumn = function(){ //metoda sprawdzajaca kolejny obs
         this.next_column = this.column;
     }
     
-     if(Game.board.b[this.row][this.column].extra == 'speed'){        //zebranie bonusu
-        Game.board.b[this.row][this.column] = Board.elements.floor;
-        this.speed+=1;
-                
+    switch(Game.board.b[this.row][this.column].extra){                //zbieranie bonusow wspolnych dla bohatera jak i dla enemy
+        case 'speed':
+            if(this.name === 'enemy'){
+                this.change('speed');
+                Game.board.b[this.row][this.column] = Board.elements.floor;
+            }else{
+                Game.board.b[this.row][this.column] = Board.elements.floor;
+                this.speed++;       //bohater
+            }
+            break;
+        case 'ghost':
+            if(this.name === 'enemy'){
+                this.change('ghost');
+                Game.board.b[this.row][this.column] = Board.elements.floor;
+            }else{
+                Game.board.b[this.row][this.column] = Board.elements.floor;    
+                this.ghost = true;
+                console.log('cos');
+            }
+            break;
     }
-     if(this.speed>2){            //odliczanie czasu trwania bonusu
-         this.timer--;
-         if(this.timer<0){
-             this.speed = 2;
-             this.timer = 200;
-         }
-     }
+    
+//     if(this.speed>2){            //odliczanie czasu trwania bonusu prednosci
+//         this.timer--;
+//         if(this.timer<0){
+//             this.speed = 2;
+//             this.timer = 200;
+//         }
+//     }
 }
 Character.prototype.draw = function(){ //metoda
     if(this.state.slice(-2)=='go'){
@@ -157,6 +175,7 @@ function Hero(){
     this.x = Game.board.fW;   //x,y ustawia poczatkowe umiejscowienie gracza
     this.y = Game.board.fH;
    // this.timer = 200;
+    this.life = 1;
     
     this.rowAndColumn();
 }
@@ -209,17 +228,36 @@ Hero.prototype.draw = function(){
           if(this.state !='ko' && this.enemyHitTest()){
               this.setKO();
           }
-      };      
+};
+
+Hero.prototype.rowAndColumn = function(){
+  this.parent.rowAndColumn.call(this);
+    
+    switch(Game.board.b[this.row][this.column].extra){                     //bonusy jakie moze uzyskac tylko bohater
+        case 'quantity_bomb':
+            Bomb.max_count++;
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+        case 'life':
+            this.life++;
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+        case 'range':
+            Bomb.range++;
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+           }
+};
          
 Enemy.all = {
     
 };
-function Enemy(x,y,name){
+function Enemy(x,y,type){
     Character.call(this);
     Enemy.all[this.id] = this;
     this.state = 'down_go';
     
-    switch(name){
+    switch(type){
            case 'kurczak':
             this.states = {
                 'down':{sx:0,sy:72,f:[0]},
@@ -262,6 +300,7 @@ function Enemy(x,y,name){
            }
     this.x = x;
     this.y = y;
+    this.name = 'enemy';
     this.rowAndColumn();
     this.setDirection();
 }
@@ -294,7 +333,7 @@ Enemy.prototype.setDirectionLogic = function(){
         for(var j = this.row-1;j<=this.row+1;j++){
             if(!(i==this.column && j==this.row)){
                 if(i==this.column || j==this.row){
-                    if(Game.board.b[j][i].type == 'empty'){
+                    if(Game.board.b[j][i].type == 'empty' || (Game.board.b[j][i].special_type == 'barrier' && this.ghost)){
                         this.canGo.push({x:i,y:j});
                     }
                 }
@@ -327,6 +366,23 @@ Enemy.prototype.rowAndColumn = function(){
     }else if(this.state==this.prev_state){
            this.setDirection(true);   
     }
+    
+    switch(Game.board.b[this.row][this.column].extra){          //jezeli enemy wejdzie na bonusy jakie moze uzyskac tylko bohater, one znikaja
+        case 'quantity_bomb':
+            if(Bomb.max_count>0)
+                Bomb.max_count--;
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+        case 'life':
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+        case 'range':
+            if(Bomb.range>1)
+                Bomb.range--;
+            Game.board.b[this.row][this.column] = Board.elements.floor;
+            break;
+        }
+    
 };
 Enemy.prototype.afterKO = function(){
     this.parent.afterKO.call(this);
@@ -340,4 +396,16 @@ Enemy.prototype.afterKO = function(){
     if(!some_enemy){
         console.log('success');
     }
+};
+Enemy.prototype.change = function(type){
+    if(type === 'speed'){
+        for(var e in Enemy.all){
+            Enemy.all[e].speed+=0.5;
+        }
+    }else{
+        for(var e in Enemy.all){
+            Enemy.all[e].ghost = true;
+        }
+    }
+    
 };
