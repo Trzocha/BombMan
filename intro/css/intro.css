@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body, #kontener {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+
+
+#obrazek{
+/*    font-size: 60px;*/
+    background: #c62b2a;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 20px;
+    
+    -webkit-box-shadow: inset 0px 0px 22px 18px rgba(235,255,16,0.54); 
+    box-shadow: inset 0px 0px 22px 18px rgba(235,255,0,0.7);
+    
+    color: rgba(255,255,255,.3);
+    text-shadow: rgba(255,255,255,.5) 0 0 15px, rgba(255,255,255,.5) 0 0 10px;
+}
+
+#menuu{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    
+    color:white;
+    height: 70%;
+   
+}
+li{
+    height: 45px;
+    list-style: url("../img/emptyBomb.png");
+    padding: 10px;
+    font-size: 20px;
+
+}
+
+
+@media screen and (max-width: 470px){
+    #obrazek{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:471px) and (max-width: 700px){
+    #obrazek{
+        font-size: 40px;
+    }
+}
+@media screen and (min-width: 701px){
+    #obrazek{
+        font-size: 60px;
+    }
+}

@@ -1,0 +1,6 @@
+poziomy //w trakcie
+ekran wczytywania //w trakcie
+dzwi   //nie bedzie
+aktualne parametry z gry //w trakcie
+zapisywanie wynikow do bazy
+praca nad szybkoscia dzia³ania
