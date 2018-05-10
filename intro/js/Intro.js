@@ -1,7 +1,3 @@
-window.onload = function(){
-    ajaxInit;
-    Intro.init();
-}
 
 Intro = {
     imgBomb: "url('intro/img/bomb.png')",
@@ -9,6 +5,7 @@ Intro = {
     menu: document.getElementsByTagName("li"),
     iterator: 0,
     prevIterator:0,
+    flagFirstTime : false,
     
     init:function(){
         
@@ -40,9 +37,9 @@ Intro = {
         }else if(ev.keyCode == 13){
             switch(Intro.menu[Intro.iterator].innerText){
                    case 'START':
-                        Intro.changePage('kontener',"intro/ajax/Start.txt");
+                        Intro.changePage('BODY',"intro/ajax/Start.txt");
                         var s = document.createElement('script');
-                        s.src = 'game/js/game.js';
+                        s.src = 'game/js/load.js';
                         document.body.appendChild(s);
                         break;
                    case 'STEROWANIE':
@@ -69,7 +66,23 @@ Intro = {
         if (XHR != null){
 		  XHR.onreadystatechange = function(){
 			if (XHR.readyState == 4 && XHR.status == 200){
-                    document.getElementById(id).innerHTML = XHR.responseText;			
+                if(id == 'BODY'){
+                    document.getElementsByTagName(id)[0].innerHTML = XHR.responseText;
+                    
+                    if(!Intro.firstTime){
+                        Intro.firstTime = true;          //jednorazowe wywolanie tylko by wczytac poczatkowy skrypt, a moze da rade ladniej??
+                       setTimeout(function(){
+                       // console.log("Wykonuje");
+                         Intro.init();
+                       },300);
+                    }else{
+                         window.removeEventListener('keyup',Intro.move);   //po właczeniu gry, usuwam nasluchiwacz sterowania menu
+                         document.getElementsByTagName(id)[0].style.background = 'yellow';
+                    }
+                     
+                }else{
+                    document.getElementById(id).innerHTML = XHR.responseText;	
+                }
 		    }
 	     }
          XHR.open("GET", URL+"?random="+Math.random(), true);
@@ -108,7 +121,9 @@ function ajaxInit()
 	
 	return XHR;	
 }
-
+                //wywolanie
+    ajaxInit;
+    Intro.changePage('BODY',"intro/ajax/intro.txt");
 
 
 

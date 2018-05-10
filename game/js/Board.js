@@ -87,28 +87,47 @@ function Board(){
 }
 Board.prototype.draw = function(){
     
-    if(!this.temp_board){   // za pierwszym razem rysuje cała mape 
-        this.temp_board = true;
-        
-        for(var i=0;i<this.b.length;i++){
-          for(var j=0;j<this.b[i].length;j++){
-              Game.ctx.drawImage(
-                Game.spr,
-                this.b[i][j].sx,
-                this.b[i][j].sy,
-                this.fW,
-                this.fH,
-                j*this.fW*VAR.scale,
-                i*this.fH*VAR.scale,
-                this.fW*VAR.scale,
-                this.fH*VAR.scale
-              );
-          }
-        }
-    }else{                  //za n-tym razem akcje na mapie, bez stałych elementów
-        
-        for(var i=0;i<this.b.length-1;i++){
-            for(var j=1;j<this.b[i].length-1;j++){
+//    if(!this.temp_board){   // za pierwszym razem rysuje cała mape 
+//        this.temp_board = true;
+//        
+//        for(var i=0;i<this.b.length;i++){
+//          for(var j=0;j<this.b[i].length;j++){
+//              Game.ctx.drawImage(
+//                Game.spr,
+//                this.b[i][j].sx,
+//                this.b[i][j].sy,
+//                this.fW,
+//                this.fH,
+//                j*this.fW*VAR.scale,
+//                i*this.fH*VAR.scale,
+//                this.fW*VAR.scale,
+//                this.fH*VAR.scale
+//              );
+//          }
+//        }
+//    }else{                  //za n-tym razem akcje na mapie, bez stałych elementów
+//        
+//        for(var i=0;i<this.b.length-1;i++){
+//            for(var j=1;j<this.b[i].length-1;j++){
+//                    Game.ctx.drawImage(
+//                        Game.spr,
+//                        this.b[i][j].sx,
+//                        this.b[i][j].sy,
+//                        this.fW,
+//                        this.fH,
+//                        j*this.fW*VAR.scale,
+//                        i*this.fH*VAR.scale,
+//                        this.fW*VAR.scale,
+//                        this.fH*VAR.scale
+//                    );  
+//                        if(this.b[i][j].sub_type != 'board'){  //rysowanie bomb, animacji
+//                        this.b[i][j].draw();
+//                    }
+//                }
+//        }
+//    }
+     for(var i=0;i<this.b.length;i++){
+            for(var j=0;j<this.b[i].length;j++){
                     Game.ctx.drawImage(
                         Game.spr,
                         this.b[i][j].sx,
@@ -125,7 +144,7 @@ Board.prototype.draw = function(){
                     }
                 }
         }
-    }
+    
 };
 Board.prototype.getEmptySpace = function(){ //funkcja zwracajaca puste miejsca tam gdzie ma sie pojawic skrzynka
     return this.emptySpaces.length>0 ? this.emptySpaces.shift(): null;

@@ -5,12 +5,18 @@
 body, #kontener {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     background: black;
+}
+
+canvas{
+    position: absolute;
+    top:0;
+    left:0;
 }
 
 
 #obrazek{
-/*    font-size: 60px;*/
     background: #c62b2a;
     font-family: 'Orbitron', sans-serif;
     text-align: center;
