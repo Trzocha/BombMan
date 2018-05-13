@@ -77,12 +77,13 @@ Intro = {
                        },300);
                     }else{
                          window.removeEventListener('keyup',Intro.move);   //po właczeniu gry, usuwam nasluchiwacz sterowania menu
-                         document.getElementsByTagName(id)[0].style.background = 'yellow';
+                        // document.getElementsByTagName(id)[0].style.background = 'yellow';
                     }
                      
                 }else{
                     document.getElementById(id).innerHTML = XHR.responseText;	
                 }
+                
 		    }
 	     }
          XHR.open("GET", URL+"?random="+Math.random(), true);

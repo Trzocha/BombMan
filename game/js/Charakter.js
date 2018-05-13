@@ -277,6 +277,7 @@ function Enemy(x,y,type){
     Character.call(this);
     Enemy.all[this.id] = this;
     this.state = 'down_go';
+    this.type = type;
     
     switch(type){
            case 'kurczak':
@@ -419,6 +420,7 @@ Enemy.prototype.rowAndColumn = function(){
 };
 Enemy.prototype.afterKO = function(){
     this.parent.afterKO.call(this);
+    this.points();
     delete Enemy.all[this.id];
     Enemy.counter--;
     Game.change_statistic();
@@ -444,3 +446,19 @@ Enemy.prototype.change = function(type){
     }
     
 };
+Enemy.prototype.points = function(){
+    switch(this.type){
+        case 'kurczak':
+            VAR.score+=100;
+            break;
+        case 'balonik':
+            VAR.score+=200;
+            break;
+        case 'cebula':
+            VAR.score+=300;
+            break;
+        case 'blue_ghost':
+            VAR.score+=400;
+            break;
+    }
+}

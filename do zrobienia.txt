@@ -4,3 +4,13 @@ dzwi   //nie bedzie
 aktualne parametry z gry //w trakcie
 zapisywanie wynikow do bazy
 praca nad szybkoscia dzia³ania
+
+Bledy:
+przy modzie ghost mona stawiac bomby na mur oraz skrzynki
+
+przy wybuchu bonusu nie aktuaizuje sie liczba stworkow
+
+za szybke przejscie z poziomu na poziom
+
+trudnosc potworow mozna zwiekszyc przez zmiane tabeli zmiany kierunkow
+

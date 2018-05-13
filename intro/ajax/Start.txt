@@ -1,1 +1,18 @@
-<div id='markGame'><div>
+<div id="Game">
+    <div id='markGame'></div>
+
+     <div id="buttons">
+        <div class="left">&larr;</div>
+        <div class="right">&rarr;</div>
+        <div class="down">&darr;</div>
+        <div class="up">&uarr;</div>
+        <div class="space">BomB</div>
+    </div>
+
+    <div id="setting">?
+        <ul id="unfold">
+            <li>Tryb komputerowy</li>
+            <li>Tryb komorkowy</li>
+        </ul>
+    </div>
+</div>

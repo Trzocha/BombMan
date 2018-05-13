@@ -6,7 +6,7 @@ VAR = {
 	scale:2,// elementy gry będą wklejane w odpowiedniej skali
 	//
 	lastTime:0,
-    enemy:1,  //liczna mnozona x3
+    enemy:5,  //liczna mnozona x3
     crate:20,
     bonus:10,
     gameLVL:1,
@@ -32,9 +32,18 @@ VAR = {
     }
 }
 
-Mouse = {
-    keyCode : 39,
-    type : 'keydown'
+variableDOM = {
+    idSetting : document.getElementById("setting"),
+    idUnfold : document.getElementById("unfold"),
+    idButtons : document.getElementById("buttons"),
+    classBtnUp: document.getElementsByClassName('up')[0],
+    classBtnDown: document.getElementsByClassName('down')[0],
+    classBtnLeft: document.getElementsByClassName('left')[0],
+    classBtnRight: document.getElementsByClassName('right')[0],
+    classBtnSpace: document.getElementsByClassName('space')[0],
+    BtnColor: "#589018",
+    
+    counterUnfold : 0
 }
 // Obiekt zawierający bazowe funckje związane z grą.
 // Game nie ma konstruktora, jest jedynie obiektem grupującym funkcje.
@@ -43,8 +52,8 @@ Game = {
 	init:function(){
 		// Tworzę canvas
         Game.spr = new Image();
-        //Game.spr.src = 'game/img/bombe3.png';      //orginal
-        Game.spr.src = 'img/bombe3.png';      //debug
+        Game.spr.src = 'game/img/bombe3.png';      //orginal
+//        Game.spr.src = 'img/bombe3.png';      //debug
         
 		Game.canvas = document.createElement('canvas');
 		// Przypisuję kontekst 2D do zmiennej ctx, która jest właściwością obiektu Game
@@ -57,7 +66,7 @@ Game = {
 		window.addEventListener('resize', Game.layout, false);
 		// Canvas zostaje dodany do DOM
         
-		document.body.appendChild(Game.canvas);
+		document.getElementById("Game").appendChild(Game.canvas);
         
         Game.toDraw = {};  //obiekt w którym wrzucane są obrazki do animowania
         Game.hero = new Hero();
@@ -79,39 +88,84 @@ Game = {
         window.addEventListener('keyup',Game.onKey,false);
         
         
-        document.getElementsByClassName('up')[0].addEventListener("mousedown",function(){
+        variableDOM.classBtnUp.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
+            variableDOM.classBtnUp.style.background = variableDOM.BtnColor;
         });
-         document.getElementsByClassName('up')[0].addEventListener("mouseup",function(){
+        variableDOM.classBtnUp.addEventListener("mouseup",function(){
             Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+            variableDOM.classBtnUp.style.background = "";
         });
         
-        document.getElementsByClassName('down')[0].addEventListener("mousedown",function(){
+        variableDOM.classBtnDown.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
+            variableDOM.classBtnDown.style.background = variableDOM.BtnColor;
         });
-         document.getElementsByClassName('down')[0].addEventListener("mouseup",function(){
+        variableDOM.classBtnDown.addEventListener("mouseup",function(){
             Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+            variableDOM.classBtnDown.style.background = "";
         });
         
-        document.getElementsByClassName('right')[0].addEventListener("mousedown",function(){
+        variableDOM.classBtnRight.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
+            variableDOM.classBtnRight.style.background = variableDOM.BtnColor;
         });
-         document.getElementsByClassName('right')[0].addEventListener("mouseup",function(){
+        variableDOM.classBtnRight.addEventListener("mouseup",function(){
             Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+            variableDOM.classBtnRight.style.background = "";
         });
         
-        document.getElementsByClassName('left')[0].addEventListener("mousedown",function(){
+        variableDOM.classBtnLeft.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
+            variableDOM.classBtnLeft.style.background = variableDOM.BtnColor;
         });
-         document.getElementsByClassName('left')[0].addEventListener("mouseup",function(){
+        variableDOM.classBtnLeft.addEventListener("mouseup",function(){
             Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+            variableDOM.classBtnLeft.style.background = "";
         });
         
-        document.getElementsByClassName('space')[0].addEventListener("mousedown",function(){
+        variableDOM.classBtnSpace.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
+            variableDOM.classBtnSpace.style.background = variableDOM.BtnColor;
         });
-         document.getElementsByClassName('space')[0].addEventListener("mouseup",function(){
+        variableDOM.classBtnSpace.addEventListener("mouseup",function(){
             Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+            variableDOM.classBtnSpace.style.background = "";
+        });
+        
+        variableDOM.idSetting.addEventListener("click",function(){
+            if(variableDOM.counterUnfold%2 == 0){
+                if(variableDOM.counterUnfold == 0){
+                    variableDOM.idUnfold.firstElementChild.style.background ='green';
+                    variableDOM.idUnfold.lastElementChild.style.background = 'red';
+                }
+                variableDOM.idSetting.style.background = variableDOM.BtnColor;
+                variableDOM.idSetting.style.height = "auto";
+                variableDOM.idUnfold.style.visibility = "visible";
+            }else{
+              variableDOM.idSetting.style.background = "";
+              variableDOM.idSetting.style.height = "";
+              variableDOM.idUnfold.style.visibility = "hidden";  
+            }
+            variableDOM.counterUnfold++;         
+        });
+        
+       variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){
+           ev.stopPropagation();
+            if(variableDOM.idUnfold.firstElementChild.style.background == 'red'){
+                variableDOM.idUnfold.firstElementChild.style.background = 'green';
+                variableDOM.idUnfold.lastElementChild.style.background = 'red';
+                variableDOM.idButtons.style.visibility = 'hidden';
+            }
+        });    
+        
+       variableDOM.idUnfold.lastElementChild.addEventListener("click",function(ev){
+           ev.stopPropagation();
+            if( variableDOM.idUnfold.lastElementChild.style.background == 'red'){
+                variableDOM.idUnfold.lastElementChild.style.background = 'green';
+                variableDOM.idUnfold.firstElementChild.style.background = 'red';
+                variableDOM.idButtons.style.visibility = 'visible';
+            }
         });
         
         Game.markGame();        //oznaczenia do gry
@@ -219,27 +273,9 @@ Game = {
 
     },
     markGame:function(){
-        var gameDOC = document.createElement("div");        //glowny contener na oznaczenia
-        gameDOC.innerHTML = "<div id='markGame'><div>";
-        document.body.appendChild(gameDOC);
-        
-       //var pom = document.getElementById("markGame");
-//        
-//        Game.gameLVL = document.createElement("div");
-//        Game.gameLVL.className = "GameLVL";
-//        Game.gameLVL.innerHTML = "LVL: "+VAR.gameLVL;
-//        pom.appendChild(Game.gameLVL);
-//        
-//        Game.heroLife = document.createElement("div");
-//        Game.heroLife.className = "HeroLife";
-//        Game.heroLife.innerHTML = "Life: "+Game.hero.life;
-//        pom.appendChild(Game.heroLife);
-//        
-//        Game.enemyNumber = document.createElement("div");
-//        Game.enemyNumber.className = "EnemyNumber";
-//        Game.enemyNumber.innerHTML = "Enemy: "+Enemy.counter;
-//        
-//        pom.appendChild(Game.enemyNumber);
+//        var gameDOC = document.createElement("div");        //glowny contener na oznaczenia
+//        gameDOC.innerHTML = "<div id='markGame'><div>";
+//        document.body.appendChild(gameDOC);
         
         var frag = document.createDocumentFragment();
         

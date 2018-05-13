@@ -1,7 +1,4 @@
-<div>
-NA KOMPIE STRZA£KAMI
-BOMBA SPACJA
-
-
-DOBREJ ZABAWY
-</div>
+<ul id="choiceControl">
+    <li>Tryb komputerowy</li>
+    <li>Tryb komorkowy</li>
+</ul>

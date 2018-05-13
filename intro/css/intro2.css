@@ -1,76 +1,102 @@
-body{
-    margin:0;
+*{
+    margin: 0;
     padding: 0;
-    overflow: hidden;
+}
+html{
+    font-size: 20px;
+}
+body, #contener,#Game {
     width: 100vw;
     height: 100vh;
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#000204), color-stop(#2d3032), color-stop(#585c60), color-stop(#868c92), to(#b8c0c8));
-    background-image: linear-gradient(to top, #000204, #2d3032, #585c60, #868c92, #b8c0c8);
+    overflow: hidden;
+}
+/*SEKCJA INTRO*/
+#contener{
+    background: black;
 }
 
+#obrazek{
+    background: #c62b2a;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 20px;
+    
+    -webkit-box-shadow: inset 0px 0px 22px 18px rgba(235,255,16,0.54); 
+    box-shadow: inset 0px 0px 22px 18px rgba(235,255,0,0.7);
+    
+    color: rgba(255,255,255,.3);
+    text-shadow: rgba(255,255,255,.5) 0 0 15px, rgba(255,255,255,.5) 0 0 10px;
+}
+
+#menuu{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    
+    color:white;
+    height: 70%;
+   
+}
+#menuu ul li{
+    height: 45px;
+    list-style: url("../img/emptyBomb.png");
+    padding: 10px;
+    font-size: 20px;
+}
+#choiceControl{
+    list-style: none;
+}
+
+@media screen and (max-width: 470px){
+    #obrazek{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:471px) and (max-width: 700px){
+    #obrazek{
+        font-size: 40px;
+    }
+}
+@media screen and (min-width: 701px){
+    #obrazek{
+        font-size: 60px;
+    }
+}
+
+
+
+/*SEKCJA GAME*/
+#Game{
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#000204), color-stop(#2d3032), color-stop(#585c60), color-stop(#868c92), to(#b8c0c8));
+    background-image: linear-gradient(to top, #000204, #2d3032, #585c60, #868c92, #b8c0c8);
+    font-family: 'Orbitron', sans-serif;
+}
 canvas{
     position: absolute;
     top:0;
     left:0;
-    z-index: -1;
+    z-index: 0;
 }
-
-html{
-    font-size: 20px;
-    font-family: 'Orbitron', sans-serif;
-}
-ul{
+#unfold{
     list-style: none;
     padding-left: 1rem;
     margin-bottom: 0;
-    z-index: 1;
     visibility: hidden;
-/*
-    -webkit-animation: show 3s ease-out;
-    animation: show 3s ease-out;
-*/
+    z-index: 1;
 }
-/*
-@-webkit-keyframes show{
-    0%{
-        opacity: 0;
-    }
-    70%{
-        opacity: 0.3;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes show{
-   0%{
-        opacity: 0;
-    }
-    70%{
-        opacity: 0.3;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-*/
-li{
+#unfold li{
     display: block;
     border-bottom: 1px solid black;
     border: 1px solid black;
     width: 15rem;
 }
-li:first-child{
-    background: green;
-}
-li:last-child{
-    background: red;
-}
-
-
 #markGame{
-/*    font-family: 'Orbitron', sans-serif;*/
-/*   position: relative;*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -83,8 +109,6 @@ li:last-child{
     flex-direction: row;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-/*    width: 100%;*/
-/*    margin-left: 35%;*/
 }
 .GameLVL{
     margin: 0 0rem 0 0rem;
@@ -108,8 +132,7 @@ li:last-child{
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    visibility: hidden;
-   
+    visibility: hidden; 
 }
 .left, .right,.down, .up, .space{
     position: relative;
@@ -123,17 +146,12 @@ li:last-child{
 	
 }
 .left:hover, .right:hover , .down:hover, .up:hover, .space:hover{
-/*    background: #589018;*/
     cursor: pointer;
-    font-weight:bold;
-    
+    font-weight:bold;  
 }
-
 .space{
     width: 4rem;
 }
-
-
 #setting{
     position: absolute;
     top:0;
@@ -146,8 +164,5 @@ li:last-child{
 #setting:hover{
     background: #589018;
     cursor: pointer;
-    font-weight:bold;
-    
+    font-weight:bold;  
 }
-
-
