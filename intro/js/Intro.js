@@ -1,17 +1,55 @@
 
 Intro = {
-    imgBomb: "url('intro/img/bomb.png')",
-    imgEmptyBomb:"url('intro/img/emptyBomb.png')",
+//    imgBomb: "url('intro/img/bomb20.png')",
+//    imgEmptyBomb:"url('intro/img/emptyBomb20.png')",
     menu: document.getElementsByTagName("li"),
-    iterator: 0,
+    iterator: 0,    //zmienne do ustawiana obrazka bomby w odpowiednim miejscu po przejsciu strzalkami
     prevIterator:0,
     flagFirstTime : false,
+    choiceCtrl: [],               //eventy dla zmiany opcji sterowania
     
-    init:function(){
-        
+    CtrlCPU: true,
+    CtrlMOBILE: false,
+    
+    init:function(){   //funkcja wywulywana jako pierwsza przy wczytaniu menu glownego
        this.set();
+       this.imgMenu();
         
-        window.addEventListener('keyup',Intro.move);
+       window.addEventListener('resize', Intro.imgMenu, false);
+       window.addEventListener('keyup',Intro.move);
+    },
+    imgMenu:function(){             //wczytanie odpowiedniego obrazka menu przy zmiane rozdzielczosci (nie dziala jak powinno)
+        var hw = window.innerHeight;
+        var vw = window.innerWidth;
+        
+        if(vw >= 320 && vw <= 480){
+            this.imgBomb = "url('intro/img/bomb20.png')";
+            this.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+        }else if(vw > 480 && vw <= 767){
+            this.imgBomb =  "url('intro/img/bomb20.png')";
+            this.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+        }
+    },
+    choiceMenu:function(type){
+        console.log("haloo");
+        switch(type){
+            case 'MAIN':
+                Intro.changePage('menuu',"intro/ajax/Main.txt");   
+                setTimeout(function(){
+                    Intro.init();
+                },100);
+                break;
+            case 'STEROWANIE':
+                window.removeEventListener('keyup',Intro.move);
+                    Intro.choiceCtrl[0] = document.getElementById("choiceControl").children[0];
+                    Intro.choiceCtrl[1] = document.getElementById("choiceControl").children[1];
+                    Intro.choiceCtrl[2] = document.getElementById("choiceControl").children[2];
+                    Intro.click();
+                break;
+            case 'WYNIKI':
+                window.removeEventListener('keyup',Intro.move);
+                break;
+        }
     },
     move:function(ev){
         if(ev.keyCode==38 || ev.keyCode==40){
@@ -44,6 +82,9 @@ Intro = {
                         break;
                    case 'STEROWANIE':
                         Intro.changePage('menuu',"intro/ajax/Sterowanie.txt");
+                        setTimeout(function(){
+                            Intro.choiceMenu('STEROWANIE');
+                        },100);
                         break;
                    case 'WYNIKI':
                         Intro.changePage("menuu","intro/ajax/Wyniki.txt");
@@ -55,6 +96,33 @@ Intro = {
             Intro.set();
             this.change = false;
         }
+    },
+    click:function(){
+        Intro.choiceCtrl[0].addEventListener('click',function(){    //sterowanie CPU
+            Intro.choiceCtrl[0].style.background = "green";
+            Intro.choiceCtrl[1].style.background = "red";
+            Intro.CtrlCPU = true;
+            Intro.CtrlMOBILE = false;
+            Intro.changePage("description","intro/ajax/SterOpisCPU.txt");
+//            setTimeout(function(){
+//                document.getElementById("buttons").style.visibility = 'hidden';
+//            },100);
+            
+        });
+        Intro.choiceCtrl[1].addEventListener('click',function(){  //Sterowanie Mobile
+            Intro.choiceCtrl[1].style.background = "green";
+            Intro.choiceCtrl[0].style.background = "red";    
+            Intro.CtrlCPU = false;
+            Intro.CtrlMOBILE = true;
+            Intro.changePage("description","intro/ajax/SterOpisMobile.txt");
+            setTimeout(function(){
+                document.getElementById("buttons").style.visibility = 'visible';
+            },100);
+        });
+        Intro.choiceCtrl[2].addEventListener('click',function(){ //Powrot
+            Intro.choiceMenu('MAIN');
+        });
+        
     },
     set:function(){
         this.menu[this.prevIterator].style.listStyle = this.imgEmptyBomb;
@@ -74,7 +142,7 @@ Intro = {
                        setTimeout(function(){
                        // console.log("Wykonuje");
                          Intro.init();
-                       },300);
+                       },200);
                     }else{
                          window.removeEventListener('keyup',Intro.move);   //po właczeniu gry, usuwam nasluchiwacz sterowania menu
                         // document.getElementsByTagName(id)[0].style.background = 'yellow';
@@ -122,6 +190,7 @@ function ajaxInit()
 	
 	return XHR;	
 }
+
                 //wywolanie
     ajaxInit;
     Intro.changePage('BODY',"intro/ajax/intro.txt");

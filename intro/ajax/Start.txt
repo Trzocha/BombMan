@@ -1,13 +1,13 @@
 <div id="Game">
     <div id='markGame'></div>
 
-     <div id="buttons">
-        <div class="left">&larr;</div>
-        <div class="right">&rarr;</div>
-        <div class="down">&darr;</div>
-        <div class="up">&uarr;</div>
-        <div class="space">BomB</div>
-    </div>
+     <ul id="buttons">
+        <li class="left">&larr;</li >
+        <li  class="right">&rarr;</li >
+        <li  class="down">&darr;</li >
+        <li  class="up">&uarr;</li >
+        <li  class="space">BomB</li >
+    </ul>
 
     <div id="setting">?
         <ul id="unfold">

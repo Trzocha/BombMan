@@ -4,6 +4,7 @@
 }
 html{
     font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
 }
 body, #contener,#Game {
     width: 100vw;
@@ -17,7 +18,7 @@ body, #contener,#Game {
 
 #obrazek{
     background: #c62b2a;
-    font-family: 'Orbitron', sans-serif;
+/*    font-family: 'Orbitron', sans-serif;*/
     text-align: center;
     padding: 20px;
     
@@ -43,7 +44,7 @@ body, #contener,#Game {
     height: 70%;
    
 }
-#menuu ul li{
+#menuu #pkt li{
     height: 45px;
     list-style: url("../img/emptyBomb.png");
     padding: 10px;
@@ -51,7 +52,33 @@ body, #contener,#Game {
 }
 #choiceControl{
     list-style: none;
+    cursor: pointer;
 }
+#choiceControl li{
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 10px;
+}
+#choiceControl li:first-child{
+   background: green;
+}
+#choiceControl li:nth-child(2){
+   background: red;
+}
+#choiceControl li:last-child{
+    background: yellow;
+}
+#description{
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    height: 20%;
+    text-align: center;
+}
+#description #buttons{
+    color: black;
+}
+
 
 @media screen and (max-width: 470px){
     #obrazek{
@@ -133,6 +160,9 @@ canvas{
     -ms-flex-pack: center;
     justify-content: center;
     visibility: hidden; 
+}
+#buttons li{
+    list-style: none;
 }
 .left, .right,.down, .up, .space{
     position: relative;

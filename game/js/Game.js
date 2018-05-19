@@ -150,7 +150,13 @@ Game = {
             variableDOM.counterUnfold++;         
         });
         
-       variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){
+        if(Intro.CtrlMOBILE){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
+            variableDOM.idUnfold.lastElementChild.style.background = 'green';
+            variableDOM.idUnfold.firstElementChild.style.background = 'red';
+            variableDOM.idButtons.style.visibility = 'visible';
+        }
+        
+       variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){    //wybor sterowania bohaterem
            ev.stopPropagation();
             if(variableDOM.idUnfold.firstElementChild.style.background == 'red'){
                 variableDOM.idUnfold.firstElementChild.style.background = 'green';
@@ -215,15 +221,25 @@ Game = {
 		VAR.W = window.innerWidth;
 		VAR.H = window.innerHeight;
         
-        VAR.scale = Math.max(1,Math.min(  //scalowanie mapy, nie moze byc mniejsza niz 1:1, zawsze ostra ze zwgledu na wielokrotnosc wielkosci obiektów*ilosc obiektów
-            Math.floor(VAR.W/(Game.board.fW*Game.board.b[0].length)), //kolumny
-            Math.floor(VAR.H/(Game.board.fH*Game.board.b.length)) //rzedy
-        ));
-        
+//        VAR.scale = Math.max(1,Math.min(  //scalowanie mapy, nie moze byc mniejsza niz 1:1, zawsze ostra ze zwgledu na wielokrotnosc wielkosci obiektów*ilosc obiektów
+//            Math.floor(VAR.W/(Game.board.fW*Game.board.b[0].length)-10), //kolumny
+//            Math.floor(VAR.H/(Game.board.fH*Game.board.b.length)) //rzedy
+//        ));
+        if(VAR.W <= 480){
+            VAR.scale = 1;
+        }else if((VAR.W>480 && VAR.W<=780) || (VAR.W>480 && VAR.H < 420) ){
+            VAR.scale = 1.5;
+        }else if(VAR.W >780 && VAR.H>=420){
+            VAR.scale = 2;
+        }
+//        VAR.scale = 1.5;
+//        console.log(VAR.scale);
 		// Chwilowo do canvas przypiszemy wielkość okna
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
         //
+        console.log("GW: "+Game.canvas.width+" ,GH: "+Game.canvas.height);
+        console.log("GBW: "+Game.board.fW+" ,GBB0: "+Game.board.b[0].length);
         Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)'
         
         Game.ctx.imageSmoothingEnabled = false;
@@ -231,7 +247,7 @@ Game = {
         Game.ctx.mozImageSmoothingEnabled = false;
         Game.ctx.webKitImageSmoothingEnabled = false;
         
-        Game.board.temp_board = false;                    //zmienna pomocnicza aby przy zmianie rozmiaru okna tylko raz narysowac jeszcze raz cala mape
+        Game.board.temp_board = false;                    //zmienna pomocnicza aby przy zmianie rozmiaru okna tylko raz narysowac jeszcze raz cala mape(zbedne??)
 	},
 	// Funkcja, która odpala się 60 razy na sekundę
 	animationLoop:function(time){
