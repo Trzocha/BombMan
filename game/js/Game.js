@@ -35,7 +35,7 @@ VAR = {
 variableDOM = {
     idSetting : document.getElementById("setting"),
     idUnfold : document.getElementById("unfold"),
-    idButtons : document.getElementById("buttons"),
+    classButtons : document.getElementsByClassName("buttons")[0],
     classBtnUp: document.getElementsByClassName('up')[0],
     classBtnDown: document.getElementsByClassName('down')[0],
     classBtnLeft: document.getElementsByClassName('left')[0],
@@ -52,8 +52,8 @@ Game = {
 	init:function(){
 		// Tworzę canvas
         Game.spr = new Image();
-        Game.spr.src = 'game/img/bombe3.png';      //orginal
-//        Game.spr.src = 'img/bombe3.png';      //debug
+      //  Game.spr.src = ImgGame.mainImgGame;      //orginal
+        Game.spr.src = 'game/img/bombe3.png';
         
 		Game.canvas = document.createElement('canvas');
 		// Przypisuję kontekst 2D do zmiennej ctx, która jest właściwością obiektu Game
@@ -153,7 +153,7 @@ Game = {
         if(Intro.CtrlMOBILE){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
             variableDOM.idUnfold.lastElementChild.style.background = 'green';
             variableDOM.idUnfold.firstElementChild.style.background = 'red';
-            variableDOM.idButtons.style.visibility = 'visible';
+            variableDOM.classButtons.style.visibility = 'visible';
         }
         
        variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){    //wybor sterowania bohaterem
@@ -161,7 +161,7 @@ Game = {
             if(variableDOM.idUnfold.firstElementChild.style.background == 'red'){
                 variableDOM.idUnfold.firstElementChild.style.background = 'green';
                 variableDOM.idUnfold.lastElementChild.style.background = 'red';
-                variableDOM.idButtons.style.visibility = 'hidden';
+                variableDOM.classButtons.style.visibility = 'hidden';
             }
         });    
         
@@ -170,7 +170,7 @@ Game = {
             if( variableDOM.idUnfold.lastElementChild.style.background == 'red'){
                 variableDOM.idUnfold.lastElementChild.style.background = 'green';
                 variableDOM.idUnfold.firstElementChild.style.background = 'red';
-                variableDOM.idButtons.style.visibility = 'visible';
+                variableDOM.classButtons.style.visibility = 'visible';
             }
         });
         
@@ -229,8 +229,12 @@ Game = {
             VAR.scale = 1;
         }else if((VAR.W>480 && VAR.W<=780) || (VAR.W>480 && VAR.H < 420) ){
             VAR.scale = 1.5;
-        }else if(VAR.W >780 && VAR.H>=420){
+        }else if(VAR.W >780 && VAR.W<=912 && VAR.H>=420 && VAR.H<601){
             VAR.scale = 2;
+        }else if(VAR.W >912 && VAR.W <1025 && VAR.H<=600){
+            VAR.scale = 2.5;
+        }else if(VAR.W >912 && VAR.W <1025 && VAR.H > 600){
+            VAR.scale = 3;
         }
 //        VAR.scale = 1.5;
 //        console.log(VAR.scale);
@@ -238,8 +242,8 @@ Game = {
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
         //
-        console.log("GW: "+Game.canvas.width+" ,GH: "+Game.canvas.height);
-        console.log("GBW: "+Game.board.fW+" ,GBB0: "+Game.board.b[0].length);
+        //console.log("GW: "+Game.canvas.width+" ,GH: "+Game.canvas.height);
+        //console.log("GBW: "+Game.board.fW+" ,GBB0: "+Game.board.b[0].length);
         Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)'
         
         Game.ctx.imageSmoothingEnabled = false;

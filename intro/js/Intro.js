@@ -1,3 +1,7 @@
+ImgGame = {   //hmmmmmm
+    
+    mainImgGame : "url('game/img/bombe3.png')"
+}
 
 Intro = {
 //    imgBomb: "url('intro/img/bomb20.png')",
@@ -12,8 +16,9 @@ Intro = {
     CtrlMOBILE: false,
     
     init:function(){   //funkcja wywulywana jako pierwsza przy wczytaniu menu glownego
-       this.set();
+        
        this.imgMenu();
+       this.set();
         
        window.addEventListener('resize', Intro.imgMenu, false);
        window.addEventListener('keyup',Intro.move);
@@ -22,12 +27,17 @@ Intro = {
         var hw = window.innerHeight;
         var vw = window.innerWidth;
         
+        console.log(hw + " , "+vw);
+        
         if(vw >= 320 && vw <= 480){
-            this.imgBomb = "url('intro/img/bomb20.png')";
-            this.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            Intro.imgBomb = "url('intro/img/bomb20.png')";
+            Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
         }else if(vw > 480 && vw <= 767){
-            this.imgBomb =  "url('intro/img/bomb20.png')";
-            this.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            Intro.imgBomb =  "url('intro/img/bomb20.png')";
+            Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+        }else if(vw > 767 && vw <= 1024){
+            Intro.imgBomb =  "url('intro/img/bomb.png')";
+            Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
         }
     },
     choiceMenu:function(type){
@@ -116,7 +126,7 @@ Intro = {
             Intro.CtrlMOBILE = true;
             Intro.changePage("description","intro/ajax/SterOpisMobile.txt");
             setTimeout(function(){
-                document.getElementById("buttons").style.visibility = 'visible';
+                document.getElementsByClassName("buttons")[0].style.visibility = 'visible';
             },100);
         });
         Intro.choiceCtrl[2].addEventListener('click',function(){ //Powrot

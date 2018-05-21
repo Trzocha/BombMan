@@ -1,7 +1,7 @@
 <div id="Game">
     <div id='markGame'></div>
 
-     <ul id="buttons">
+     <ul class="buttons game">
         <li class="left">&larr;</li >
         <li  class="right">&rarr;</li >
         <li  class="down">&darr;</li >
