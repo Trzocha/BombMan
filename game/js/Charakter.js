@@ -276,6 +276,7 @@ function Enemy(x,y,type){
     Enemy.counter++;
     Character.call(this);
     Enemy.all[this.id] = this;
+    
     this.state = 'down_go';
     this.type = type;
     

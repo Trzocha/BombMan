@@ -1,8 +1,3 @@
-ImgGame = {   //hmmmmmm
-    
-    mainImgGame : "url('game/img/bombe3.png')"
-}
-
 Intro = {
 //    imgBomb: "url('intro/img/bomb20.png')",
 //    imgEmptyBomb:"url('intro/img/emptyBomb20.png')",
@@ -29,13 +24,16 @@ Intro = {
         
         console.log(hw + " , "+vw);
         
-        if(vw >= 320 && vw <= 480){
+        if(vw >= 320 && vw < 480){
             Intro.imgBomb = "url('intro/img/bomb20.png')";
             Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-        }else if(vw > 480 && vw <= 767){
+        }else if(vw >= 480 && vw < 768){
             Intro.imgBomb =  "url('intro/img/bomb20.png')";
             Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-        }else if(vw > 767 && vw <= 1024){
+        }else if(vw >= 768 && vw < 1024){
+            Intro.imgBomb =  "url('intro/img/bomb.png')";
+            Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
+        }else if(vw >= 1024){
             Intro.imgBomb =  "url('intro/img/bomb.png')";
             Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
         }

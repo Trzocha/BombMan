@@ -91,7 +91,11 @@ body, #contener,#Game {
 }
 .left:hover, .right:hover , .down:hover, .up:hover, .space:hover{
     cursor: pointer;
-    font-weight:bold;  
+    font-weight: 700;  
+}
+.left:active, .right:active, .down:active , .up:active, .space:active{
+    background: #22313F;
+    color: #C8F7C5;
 }
 
 /*SEKCJA GAME*/
@@ -545,14 +549,209 @@ canvas{
     }
   
 }
-@media (min-width: 1025px) and (max-width: 1280px) {
-    
-  #menuu #pkt li{
-    list-style: url("../img/emptyBomb.png");
-}
+@media (min-width: 1025px) and (max-width: 1100px) and (orientation: landscape){
+    html{
+        font-size: 40px;
+    }
+    #obrazek{
+        font-size: 1.2rem;
+    }
+    #menuu{
+        font-size: 0.6rem;
+        height: 70%;
+    }
+    #menuu #pkt li{
+        list-style: url("../img/emptyBomb.png");
+        padding: 0.3rem;
+    }
+    #choiceControl{
+        height: 75%;
+    }
+    #choiceControl li{
+        padding: 0.2rem;
+    }
+    #description{
+        height: 25%;
+        font-size: 0.5rem;
+    }
+    #buttons{
+        bottom: 0.4rem;
+    }
+    h2{
+        font-size: inherit;
+    }
+     .buttons.intro{
+        bottom: 1rem;
+    }
+    .buttons.game{
+        bottom: 1.2rem;
+        font-size: 0.6rem;
+    }
+    .space{
+        width: 4rem;
+    }
+    .left, .right,.down, .up, .space{
+        margin: 0 1rem 0 1rem;
+    }
+     #markGame{
+        font-size: 0.7rem;
+    }
+    #setting{
+        font-size: 0.8rem;
+    }
+    .GameLVL{
+        margin: 0 0 0 1rem;
+    }
+    .HeroLife{
+       margin: 0 0 0 13rem;
+    }
+    .EnemyNumber{
+        margin: 0 0 0 1rem;
+    }
+    .Score{
+        margin: 0 1rem 0 0;
+    }
+    #unfold li{
+        width: 8rem;
+        font-size: 0.6rem;
+    }
   
 }
-@media (min-width: 1281px) {
+@media (min-width: 1101px) and (max-width: 1279px) and (orientation: landscape){
+    html{
+        font-size: 42px;
+    }
+    #obrazek{
+        font-size: 1.2rem;
+    }
+    #menuu{
+        font-size: 0.6rem;
+        height: 70%;
+    }
+    #menuu #pkt li{
+        list-style: url("../img/emptyBomb.png");
+        padding: 0.3rem;
+    }
+    #choiceControl{
+        height: 75%;
+    }
+    #choiceControl li{
+        padding: 0.2rem;
+    }
+    #description{
+        height: 25%;
+        font-size: 0.5rem;
+    }
+    #buttons{
+        bottom: 0.4rem;
+    }
+    h2{
+        font-size: inherit;
+    }
+     .buttons.intro{
+        bottom: 1rem;
+    }
+    .buttons.game{
+        bottom: 1.2rem;
+        font-size: 0.6rem;
+    }
+    .space{
+        width: 4rem;
+    }
+    .left, .right,.down, .up, .space{
+        margin: 0 1rem 0 1rem;
+    }
+     #markGame{
+        font-size: 0.7rem;
+    }
+    #setting{
+        font-size: 0.8rem;
+    }
+    .GameLVL{
+        margin: 0 0 0 1rem;
+    }
+    .HeroLife{
+       margin: 0 0 0 15rem;
+    }
+    .EnemyNumber{
+        margin: 0 1rem 0 2rem;
+    }
+    .Score{
+        margin: 0 1rem 0 0;
+    }
+    #unfold li{
+        width: 8rem;
+        font-size: 0.6rem;
+    }
+  
+}
+
+@media (min-width: 1280px) and (orientation: landscape) {
+   html{
+        font-size: 45px;
+    }
+    #obrazek{
+        font-size: 1.2rem;
+    }
+    #menuu{
+        font-size: 0.6rem;
+        height: 70%;
+    }
+    #menuu #pkt li{
+        list-style: url("../img/emptyBomb.png");
+        padding: 0.3rem;
+    }
+    #choiceControl{
+        height: 75%;
+    }
+    #choiceControl li{
+        padding: 0.2rem;
+    }
+    #description{
+        height: 25%;
+        font-size: 0.5rem;
+    }
+    #buttons{
+        bottom: 0.4rem;
+    }
+    h2{
+        font-size: inherit;
+    }
+     .buttons.intro{
+        bottom: 1rem;
+    }
+    .buttons.game{
+        bottom: 1.2rem;
+        font-size: 0.6rem;
+    }
+    .space{
+        width: 4rem;
+    }
+    .left, .right,.down, .up, .space{
+        margin: 0 1rem 0 1rem;
+    }
+     #markGame{
+        font-size: 0.7rem;
+    }
+    #setting{
+        font-size: 0.8rem;
+    }
+    .GameLVL{
+        margin: 0 0 0 1rem;
+    }
+    .HeroLife{
+       margin: 0 0 0 15rem;
+    }
+    .EnemyNumber{
+        margin: 0 1rem 0 2rem;
+    }
+    .Score{
+        margin: 0 1rem 0 0;
+    }
+    #unfold li{
+        width: 8rem;
+        font-size: 0.6rem;
+    }
   
   
   

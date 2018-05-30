@@ -133,6 +133,7 @@ Bomb.prototype.draw = function(){
          if(this.end_bum){              //po zakonczeniu wybuchu jezeli wybuchl bonus dodaje do gry wroga
             this.end_bum = false;
             new Enemy(this.bonus_y*Game.board.fW,this.bonus_x*Game.board.fH,'balonik');
+            Game.change_statistic();
         }
         
     }    
