@@ -7,7 +7,7 @@ function Crate(column,row){
     
     this.current_f = 0;
     this.f = [0,0,1,1,2,2,3,3,4,4,5,5];
-    this.type = 'enemy';
+    this.type = 'empty';
     this.sub_type = 'crate';
     this.row = row;
     this.column = column;

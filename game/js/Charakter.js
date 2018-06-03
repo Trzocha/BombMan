@@ -347,18 +347,45 @@ Enemy.prototype.parent = Character.prototype;
 Enemy.prototype.setDirection = function(change){                   //jezeli change == true, losuje czy zmienic kierunek ruchu
     this.canGo = this.canGo || [];   //tablica pozwolen przejsc
     this.canGo.length =0;
-    this.arrayAllow = [     //tablica pozwolen na zmiane kierunku
-        [0,0,0,0,0,0,0,0,1,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0]
+    this.arrayAllow = [];     //glowna tablica pozwolen na zmiane kierunku
+        
+    this.arrayAllowBalonik = [   //tablice pozwoleń dla poszczegolnych typow potworow
+        [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]
     ];
+    this.arrayAllowCebula = [
+        [0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0]
+    ];
+    this.arrayAllowBlueGhost = [
+        [0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1]
+    ];
+    this.arrayAllowKurczak = [
+        [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0]
+    ];
+    
+    switch(this.type){
+           case 'kurczak':
+                this.arrayAllow = this.arrayAllowKurczak;
+                break;
+           case 'balonik':
+                this.arrayAllow = this.arrayAllowBalonik;
+                break;
+           case 'cebula':
+            this.arrayAllow = this.arrayAllowCebula;
+                break;
+           case 'blue_ghost':
+            this.arrayAllow = this.arrayAllowBlueGhost;
+                break;
+    }
+    
     if(change){
         this.option = VAR.rand(0,this.arrayAllow.length-1);   //wybor ktora z opcji pozwolen
-        this.tmp = VAR.rand(0,11);  //dlugosc tablicy
+        this.tmp = VAR.rand(0,21);  //dlugosc tablicy
         
         if(this.arrayAllow[this.option][this.tmp]){
             this.setDirectionLogic();
         }
-    }else{
+    }
+    else{                                 //podchodzenie potworow do krawedzi mapy lub do przeszkody, wtedy trzeba zmienic kierunek
         this.setDirectionLogic();
     }
 };

@@ -6,9 +6,9 @@ VAR = {
 	scale:2,// elementy gry będą wklejane w odpowiedniej skali
 	//
 	lastTime:0,
-    enemy:4,    //do zmiany
-    crate:20,
-    bonus:5,
+//    enemy:4,    //do zmiany
+//    crate:20,
+    bonus:0,
     gameLVL:1,
     score: 0,
     
@@ -91,11 +91,7 @@ Game = {
         Game.toDraw = {};  //obiekt w którym wrzucane są obrazki do animowania
         Game.hero = new Hero();
         
-        var tmp_enemy;
-        for(var i=0;i<VAR.enemy;i++){
-            tmp_enemy = Game.board.getEmptySpace();
-            Game.space(tmp_enemy,'balonik');   
-        }
+        Game.lvlUP(true);
         
         window.addEventListener('keydown',Game.onKey,false);
         window.addEventListener('keyup',Game.onKey,false);
@@ -289,27 +285,29 @@ Game = {
         Game.score.innerHTML = "Score: "+VAR.score;
     },
     
-    lvlUP:function(){
-        VAR.gameLVL++;
-        Game.board = new Board();    //nowa plansza
-        
-        Game.hero.x = Game.board.fW; //ustawienie bohatera
-        Game.hero.y = Game.board.fH;
-        Game.hero.resetBonus();
-        
-        let enemyLenght = Game.lvlArrayEnemy[VAR.gameLVL-1].length;
+    lvlUP:function(start){
+        if(!start){       //przy starcie gry niepotrzebne
+            VAR.gameLVL++;
+            Game.board = new Board();   
+            Game.hero.x = Game.board.fW; //ustawienie bohatera
+            Game.hero.y = Game.board.fH;
+            Game.hero.resetBonus();
+        }
+         
+        let enemyLenght = Game.lvlArrayEnemy[VAR.gameLVL-1].length;    //dodawanie potworow
         let monster = 0;
         
         for(var i=1; i<enemyLenght;i+=2){
-            monster = Game.lvlArrayEnemy[VAR.gameLVL-1][i];    //nieparzyste liczba potworow
+            monster = Game.lvlArrayEnemy[VAR.gameLVL-1][i];    //nieparzyste komorka w tablicy liczba potworow
             let tmp_enemy;
             for(var j=0;j<monster;j++){
                 tmp_enemy = Game.board.getEmptySpace();
-                Game.space(tmp_enemy,Game.lvlArrayEnemy[VAR.gameLVL-1][i-1]);  //parzyste rodzaj potwora
+                Game.space(tmp_enemy,Game.lvlArrayEnemy[VAR.gameLVL-1][i-1]);  //parzyste komorki w tablicy rodzaj potwora
             }
         }
-        
-        Game.change_statistic();
+        if(!start){
+             Game.change_statistic();
+        }
 
     },
     markGame:function(){

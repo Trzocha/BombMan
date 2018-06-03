@@ -90,6 +90,7 @@ function Board(){
             for(var j=0;j<bonusCounter;j++){    //przy kazdym mozliwym dodanu bonusa 50% szans
                 if(this.arrayChanceBonus[VAR.rand(0,9)]){
                     this.array_Bonus.push(this.addBonus(bonusType));
+                    VAR.bonus++;
                 }else{ //debug
                     console.log("Nieudalo sie "+bonusType);
                 }
