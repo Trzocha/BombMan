@@ -3,7 +3,7 @@ VAR = {
 	fps:15,// animacja w Bombermenie nie była tak płynna jak we współczesnych grach
 	W:0,// szerokość okna
 	H:0,// wysokość okna
-	scale:2,// elementy gry będą wklejane w odpowiedniej skali
+	scale:0,// elementy gry będą wklejane w odpowiedniej skali
 	//
 	lastTime:0,
 //    enemy:4,    //do zmiany
@@ -11,6 +11,7 @@ VAR = {
     bonus:0,
     gameLVL:1,
     score: 0,
+    flagErr: false,
     
 	rand:function(min,max){
 		return Math.floor(Math.random()*(max-min+1))+min;
@@ -41,6 +42,8 @@ variableDOM = {
     classBtnLeft: document.getElementsByClassName('left')[0],
     classBtnRight: document.getElementsByClassName('right')[0],
     classBtnSpace: document.getElementsByClassName('space')[0],
+    gameSpace: document.getElementById("Game"),
+    errSpace: document.getElementById("errSpace"),
     BtnColor: "#589018",
     
     counterUnfold : 0
@@ -78,7 +81,7 @@ Game = {
 		Game.canvas = document.createElement('canvas');
 		// Przypisuję kontekst 2D do zmiennej ctx, która jest właściwością obiektu Game
 		Game.ctx = Game.canvas.getContext('2d');
-        
+        variableDOM.gameSpace.appendChild(Game.canvas);
         Game.board = new Board();
 		// odpalam mametodę obiektu Game
 		Game.layout();
@@ -86,8 +89,9 @@ Game = {
 		window.addEventListener('resize', Game.layout, false);
 		// Canvas zostaje dodany do DOM
         
-		document.getElementById("Game").appendChild(Game.canvas);
-        
+//		document.getElementById("Game").appendChild(Game.canvas);
+//        variableDOM.gameSpace.appendChild(Game.canvas);
+//        console.log(variableDOM.gameSpace);
         Game.toDraw = {};  //obiekt w którym wrzucane są obrazki do animowania
         Game.hero = new Hero();
         
@@ -96,31 +100,99 @@ Game = {
         window.addEventListener('keydown',Game.onKey,false);
         window.addEventListener('keyup',Game.onKey,false);
         
+        //--------------------------------------------------------------Touch
+        variableDOM.classBtnUp.addEventListener("touchstart",function(){
+            Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
+            //variableDOM.classBtnUp.style.background = variableDOM.BtnColor;
+        });
+        variableDOM.classBtnUp.addEventListener("touchend",function(){
+             setTimeout(function(){
+                Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+            },50);
+            //variableDOM.classBtnUp.style.background = "";
+        });
+          
+        variableDOM.classBtnDown.addEventListener("touchstart",function(){
+            Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
+            //variableDOM.classBtnDown.style.background = variableDOM.BtnColor;
+        });
+        variableDOM.classBtnDown.addEventListener("touchend",function(){
+             setTimeout(function(){
+                Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+            },50);
+            //variableDOM.classBtnDown.style.background = "";
+        });
         
+        variableDOM.classBtnRight.addEventListener("touchstart",function(e){
+            e.stopPropagation();
+            Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
+            //variableDOM.classBtnRight.style.background = variableDOM.BtnColor;
+        },true);
+        
+        variableDOM.classBtnRight.addEventListener("touchend",function(){
+            setTimeout(function(){
+                Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+            },50);
+           // Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+            //variableDOM.classBtnRight.style.background = "";
+        });
+        
+        variableDOM.classBtnLeft.addEventListener("touchstart",function(){
+            Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
+            //variableDOM.classBtnLeft.style.background = variableDOM.BtnColor;
+        });
+        variableDOM.classBtnLeft.addEventListener("touchend",function(){
+             setTimeout(function(){
+                Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+            },50);
+            //variableDOM.classBtnLeft.style.background = "";
+        });
+        
+        variableDOM.classBtnSpace.addEventListener("touchstart",function(){
+            Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
+            //variableDOM.classBtnSpace.style.background = variableDOM.BtnColor;
+        });
+        variableDOM.classBtnSpace.addEventListener("touchend",function(){
+             setTimeout(function(){
+                Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+            },50);
+            //variableDOM.classBtnSpace.style.background = "";
+        });
+        
+        //----------------------------------------------------------------- Mouse
         variableDOM.classBtnUp.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
             //variableDOM.classBtnUp.style.background = variableDOM.BtnColor;
         });
         variableDOM.classBtnUp.addEventListener("mouseup",function(){
-            Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+             setTimeout(function(){
+                Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+            },50);
             //variableDOM.classBtnUp.style.background = "";
         });
-        
+          
         variableDOM.classBtnDown.addEventListener("mousedown",function(){
             Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
             //variableDOM.classBtnDown.style.background = variableDOM.BtnColor;
         });
         variableDOM.classBtnDown.addEventListener("mouseup",function(){
-            Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+             setTimeout(function(){
+                Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+            },50);
             //variableDOM.classBtnDown.style.background = "";
         });
         
-        variableDOM.classBtnRight.addEventListener("mousedown",function(){
+        variableDOM.classBtnRight.addEventListener("mousedown",function(e){
+            e.stopPropagation();
             Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
             //variableDOM.classBtnRight.style.background = variableDOM.BtnColor;
-        });
+        },true);
+        
         variableDOM.classBtnRight.addEventListener("mouseup",function(){
-            Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+            setTimeout(function(){
+                Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+            },50);
+           // Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
             //variableDOM.classBtnRight.style.background = "";
         });
         
@@ -129,7 +201,9 @@ Game = {
             //variableDOM.classBtnLeft.style.background = variableDOM.BtnColor;
         });
         variableDOM.classBtnLeft.addEventListener("mouseup",function(){
-            Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+             setTimeout(function(){
+                Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+            },50);
             //variableDOM.classBtnLeft.style.background = "";
         });
         
@@ -138,7 +212,9 @@ Game = {
             //variableDOM.classBtnSpace.style.background = variableDOM.BtnColor;
         });
         variableDOM.classBtnSpace.addEventListener("mouseup",function(){
-            Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+             setTimeout(function(){
+                Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+            },50);
             //variableDOM.classBtnSpace.style.background = "";
         });
         
@@ -200,9 +276,9 @@ Game = {
         window.removeEventListener('keydown',Game.onKey);
         window.removeEventListener('keyup',Game.onKey);
     },
-	// Ta metoda będzie odpalana przy każdej zmianie wielkości okna
+    
     onKey:function(ev){
-        //console.log(ev);
+       // console.log(ev.type);
       if(ev.keyCode>=37 && ev.keyCode<=40 || ev.keyCode==32){
           if(!ev.mouse)
             ev.preventDefault();
@@ -230,30 +306,50 @@ Game = {
 		VAR.W = window.innerWidth;
 		VAR.H = window.innerHeight;
         
-        if(VAR.W <= 480){
-            VAR.scale = 1;
-        }else if((VAR.W>480 && VAR.W<=780) || (VAR.W>480 && VAR.H < 420) ){
-            VAR.scale = 1.5;
-        }else if((VAR.W >780 && VAR.W<=912 && VAR.H>=420 && VAR.H<601) || (VAR.W >=1025 && VAR.H <= 700)){
-            VAR.scale = 2;
-        }else if((VAR.W >912 && VAR.W <1025 && VAR.H<=600) || (VAR.W >=1025 && VAR.W< 1280 && VAR.H > 700)){
-            VAR.scale = 2.5;
-        }else if((VAR.W >912 && VAR.W <1025 && VAR.H > 600) || (VAR.W >=1280 && VAR.H>=750)){
-//             VAR.scale = Math.max(1,Math.min(  //scalowanie mapy, nie moze byc mniejsza niz 1:1, zawsze ostra ze zwgledu na wielokrotnosc wielkosci obiektów*ilosc obiektów
-//                Math.floor(VAR.W/(Game.board.fW*Game.board.b[0].length)), //kolumny
-//                 Math.floor(VAR.H/(Game.board.fH*Game.board.b.length)) //rzedy
-//            ));
-            VAR.scale = 3;
+        
+        if(VAR.W>VAR.H){
+            if(VAR.flagErr){
+                variableDOM.gameSpace.classList.remove("disapear");
+                variableDOM.errSpace.classList.add("err");
+                VAR.flagErr = false;
+            }
+            if(VAR.W >= 320 && VAR.W <=767 && VAR.H >=240){
+                if(VAR.W>470 && VAR.W <=800 && VAR.H>=460){
+                    VAR.scale = 1.5;
+                }else{
+                   VAR.scale = 1; 
+                }
+            }else if(VAR.W>470 && VAR.W <=800 && VAR.H>=460){
+                VAR.scale = 1.5;
+            }else if(VAR.W > 800 && VAR.W <=1000 && VAR.H>=430){
+                if(VAR.H < 520){
+                    VAR.scale = 1.5;
+                }else{
+                    VAR.scale = 2;
+                }
+            }else if(VAR.W > 1000 && VAR.W <=1400 && VAR.H>620){
+                VAR.scale = 2.5
+            }else if(VAR.W> 1400 && VAR.H>620){
+                VAR.scale = 3;
+            }else{
+                VAR.scale = 0;
+                alert("Zła rozdzielczość ekranu "+VAR.W+" ,"+VAR.H);
+            }
+        }else{
+            VAR.scale = 0;
+            variableDOM.gameSpace.classList.add("disapear");
+            variableDOM.errSpace.classList.remove("err");
+            VAR.flagErr = true;
         }
-//        VAR.scale = 1.5;
-//        console.log(VAR.scale);
+        
+        console.log(VAR.scale);
 		// Chwilowo do canvas przypiszemy wielkość okna
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
         //
         //console.log("GW: "+Game.canvas.width+" ,GH: "+Game.canvas.height);
         //console.log("GBW: "+Game.board.fW+" ,GBB0: "+Game.board.b[0].length);
-        Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)'
+        Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)';
         
         Game.ctx.imageSmoothingEnabled = false;
         Game.ctx.mozImageSmoothingEnabled = false;
@@ -265,6 +361,7 @@ Game = {
 	// Funkcja, która odpala się 60 razy na sekundę
 	animationLoop:function(time){
 		requestAnimationFrame( Game.animationLoop );
+    
 		// ograniczenie do ilości klatek zdefiniowanych w właściwości obiektu VAR (nie więcej niż VAR.fps)
 		if(time-VAR.lastTime>=1000/VAR.fps){
 			VAR.lastTime = time;
@@ -339,4 +436,12 @@ Game = {
     }
 }
 
-Game.init();
+try{
+    setTimeout(function(){
+        Game.init();
+    },100);
+    
+}catch(err){
+    alert(err);
+    console.log(err);
+}

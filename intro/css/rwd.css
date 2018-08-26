@@ -99,7 +99,7 @@ body, #contener,#Game {
 }
 
 /*SEKCJA GAME*/
-#Game{
+#Game,body{
     background-image: -webkit-gradient(linear, left bottom, left top, from(#000204), color-stop(#2d3032), color-stop(#585c60), color-stop(#868c92), to(#b8c0c8));
     background-image: linear-gradient(to top, #000204, #2d3032, #585c60, #868c92, #b8c0c8);
 }
@@ -149,8 +149,19 @@ canvas{
     cursor: pointer;
     font-weight:bold;  
 }
+#errSize{
+    position: relative;
+    top: 40%;
+    text-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+}
+.disapear, .err{
+     display: none;
+}
 
-@media (max-width: 320px) and (max-height: 240px) and (orientation: landscape) {
+
+@media (max-width: 400px) and (max-height: 280px) and (orientation: landscape) {
    html{
         font-size: 15px;
     }
@@ -189,6 +200,7 @@ canvas{
     }
     #markGame{
         font-size: 0.7rem;
+        height: auto;
     }
     #setting{
         font-size: 0.5rem;
@@ -200,7 +212,7 @@ canvas{
        margin: 0 0 0 9rem;
     }
     .EnemyNumber{
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 1rem;
     }
     .Score{
         margin: 0 1rem 0 0;
@@ -212,7 +224,7 @@ canvas{
   
 }
 
-@media (min-width: 321px) and (max-width: 480px) and (orientation: landscape) {
+@media (min-width: 400px) and (max-width: 480px) and (min-height: 281px) and (orientation: landscape) {
     html{
         font-size: 20px;
     }
@@ -241,7 +253,7 @@ canvas{
     }
     .buttons.game{
         bottom: 1rem;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
     .space{
         width: 4rem;
@@ -250,11 +262,11 @@ canvas{
         margin: 0 0.7rem 0 0.7rem;
     }
      #markGame{
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         height: 3rem;
     }
     #setting{
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
     .GameLVL{
         margin: 0 0 0 1rem;
@@ -263,14 +275,14 @@ canvas{
        margin: 0 0 0 9rem;
     }
     .EnemyNumber{
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 1rem;
     }
     .Score{
         margin: 0 1rem 0 0;
     }
     #unfold li{
         width: 10rem;
-        font-size: 0.7rem;
+        font-size: 0.5rem;
     }
 }
 
@@ -310,7 +322,7 @@ canvas{
         bottom: 1rem;
     }
     .buttons.game{
-        bottom: 0.3rem;
+        bottom: 1rem;
         font-size: 0.4rem;
     }
     .space{
@@ -332,7 +344,7 @@ canvas{
        margin: 0 0 0 12rem;
     }
     .EnemyNumber{
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 1rem;
     }
     .Score{
         margin: 0 1rem 0 0;
@@ -378,7 +390,7 @@ canvas{
         bottom: 1rem;
     }
     .buttons.game{
-        bottom: 0.6rem;
+        bottom: 2rem;
         font-size: 0.6rem;
     }
     .space{
@@ -397,10 +409,10 @@ canvas{
         margin: 0 0 0 1rem;
     }
     .HeroLife{
-       margin: 0 0 0 13rem;
+       margin: 0 0 0 12rem;
     }
     .EnemyNumber{
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 1rem;
     }
     .Score{
         margin: 0 1rem 0 0;
@@ -412,7 +424,7 @@ canvas{
 }
 
 
-@media (min-width: 671px) and (max-width: 850px) and (min-height:360px) and (orientation: landscape){   /*767*/
+@media (min-width: 671px) and (max-width: 1024px) and (min-height:360px) and (orientation: landscape){   /*767*/
     
     html{
         font-size: 25px;
@@ -448,8 +460,8 @@ canvas{
         bottom: 1rem;
     }
     .buttons.game{
-        bottom: 0.6rem;
-        font-size: 0.6rem;
+        bottom: 2rem;
+        font-size: 0.7rem;
     }
     .space{
         width: 4rem;
@@ -480,7 +492,7 @@ canvas{
         font-size: 0.6rem;
     }
 }
-@media (min-width: 851px) and (max-width: 1024px) and (orientation: landscape) {
+@media (min-width: 850px) and (max-width: 1024px) and (min-height: 520px) and (orientation: landscape) {
   
    html{
         font-size: 35px;
@@ -538,7 +550,7 @@ canvas{
        margin: 0 0 0 15rem;
     }
     .EnemyNumber{
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 1rem;
     }
     .Score{
         margin: 0 1rem 0 0;

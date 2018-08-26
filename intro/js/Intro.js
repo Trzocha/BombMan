@@ -1,10 +1,12 @@
 Intro = {
-//    imgBomb: "url('intro/img/bomb20.png')",
-//    imgEmptyBomb:"url('intro/img/emptyBomb20.png')",
     menu: document.getElementsByTagName("li"),
+    pkt: document.getElementById("pkt"),
+//    mainMenu: document.getElementById("contener"),
+//    errSpace: document.getElementById("errSpace"),
     iterator: 0,    //zmienne do ustawiana obrazka bomby w odpowiednim miejscu po przejsciu strzalkami
     prevIterator:0,
     flagFirstTime : false,
+//    flagErr: false,
     choiceCtrl: [],               //eventy dla zmiany opcji sterowania
     
     CtrlCPU: true,
@@ -22,24 +24,34 @@ Intro = {
         var hw = window.innerHeight;
         var vw = window.innerWidth;
         
-        console.log(hw + " , "+vw);
+       // alert(hw + " , "+vw);
         
-        if(vw >= 320 && vw < 480){
-            Intro.imgBomb = "url('intro/img/bomb20.png')";
-            Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-        }else if(vw >= 480 && vw < 768){
-            Intro.imgBomb =  "url('intro/img/bomb20.png')";
-            Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-        }else if(vw >= 768 && vw < 1024){
-            Intro.imgBomb =  "url('intro/img/bomb.png')";
-            Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
-        }else if(vw >= 1024){
-            Intro.imgBomb =  "url('intro/img/bomb.png')";
-            Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
-        }
+//        if(hw>vw){                      //tylko landscape  
+//            if(Intro.flagErr){
+//                Intro.mainMenu.classList.remove("disapear");
+//                Intro.errSpace.classList.add("err");
+//                Intro.flagErr = false;
+//            }
+            if(vw >= 320 && vw < 480){
+                Intro.imgBomb = "url('intro/img/bomb20.png')";
+                Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            }else if(vw >= 480 && vw < 768){
+                Intro.imgBomb =  "url('intro/img/bomb20.png')";
+                Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            }else if(vw >= 768 && vw < 1024){
+                Intro.imgBomb =  "url('intro/img/bomb.png')";
+                Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
+            }else if(vw >= 1024){
+                Intro.imgBomb =  "url('intro/img/bomb.png')";
+                Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
+            }
+//        }else{
+//            Intro.mainMenu.classList.add("disapear");
+//            Intro.errSpace.classList.remove("err");
+//            Intro.flagErr = true;
+//        }
     },
     choiceMenu:function(type){
-        console.log("haloo");
         switch(type){
             case 'MAIN':
                 Intro.changePage('menuu',"intro/ajax/Main.txt");   
@@ -84,9 +96,12 @@ Intro = {
             switch(Intro.menu[Intro.iterator].innerText){
                    case 'START':
                         Intro.changePage('BODY',"intro/ajax/Start.txt");
-                        var s = document.createElement('script');
-                        s.src = 'game/js/load.js';
-                        document.body.appendChild(s);
+                        setTimeout(function(){                          //ze wzgl na opznienia wczytania sie nowego modułu strony
+                             var s = document.createElement('script');
+                             s.src = 'game/js/load.js';
+                             document.body.appendChild(s);
+                        },500);
+                       
                         break;
                    case 'STEROWANIE':
                         Intro.changePage('menuu',"intro/ajax/Sterowanie.txt");
@@ -112,9 +127,14 @@ Intro = {
             Intro.CtrlCPU = true;
             Intro.CtrlMOBILE = false;
             Intro.changePage("description","intro/ajax/SterOpisCPU.txt");
-//            setTimeout(function(){
-//                document.getElementById("buttons").style.visibility = 'hidden';
-//            },100);
+            
+        });
+        Intro.choiceCtrl[0].addEventListener('touchstart',function(){    //sterowanie CPU
+            Intro.choiceCtrl[0].style.background = "green";
+            Intro.choiceCtrl[1].style.background = "red";
+            Intro.CtrlCPU = true;
+            Intro.CtrlMOBILE = false;
+            Intro.changePage("description","intro/ajax/SterOpisCPU.txt");
             
         });
         Intro.choiceCtrl[1].addEventListener('click',function(){  //Sterowanie Mobile
@@ -127,6 +147,22 @@ Intro = {
                 document.getElementsByClassName("buttons")[0].style.visibility = 'visible';
             },100);
         });
+        
+         Intro.choiceCtrl[1].addEventListener('touchstart',function(){  //Sterowanie Mobile
+            Intro.choiceCtrl[1].style.background = "green";
+            Intro.choiceCtrl[0].style.background = "red";    
+            Intro.CtrlCPU = false;
+            Intro.CtrlMOBILE = true;
+            Intro.changePage("description","intro/ajax/SterOpisMobile.txt");
+            setTimeout(function(){
+                document.getElementsByClassName("buttons")[0].style.visibility = 'visible';
+            },100);
+        });
+        
+         Intro.choiceCtrl[2].addEventListener('touchstart',function(){ //Powrot
+            Intro.choiceMenu('MAIN');
+        });
+        
         Intro.choiceCtrl[2].addEventListener('click',function(){ //Powrot
             Intro.choiceMenu('MAIN');
         });
@@ -135,6 +171,19 @@ Intro = {
     set:function(){
         this.menu[this.prevIterator].style.listStyle = this.imgEmptyBomb;
         this.menu[this.iterator].style.listStyle = this.imgBomb;
+        
+        this.menu[0].addEventListener("click",function(){      //touch?
+            Intro.iterator = 0;
+            Intro.move({keyCode : 13});
+        });
+        this.menu[1].addEventListener("click",function(){
+            Intro.iterator= 1;
+            Intro.move({keyCode : 13});
+        });
+        this.menu[2].addEventListener("click",function(){
+            Intro.iterator = 2;
+            Intro.move({keyCode : 13});
+        });
     },
     changePage:function(id,URL){
        var XHR = ajaxInit();
@@ -148,12 +197,10 @@ Intro = {
                     if(!Intro.firstTime){
                         Intro.firstTime = true;          //jednorazowe wywolanie tylko by wczytac poczatkowy skrypt, a moze da rade ladniej??
                        setTimeout(function(){
-                       // console.log("Wykonuje");
                          Intro.init();
                        },200);
                     }else{
                          window.removeEventListener('keyup',Intro.move);   //po właczeniu gry, usuwam nasluchiwacz sterowania menu
-                        // document.getElementsByTagName(id)[0].style.background = 'yellow';
                     }
                      
                 }else{
