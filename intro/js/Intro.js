@@ -1,12 +1,12 @@
 Intro = {
     menu: document.getElementsByTagName("li"),
     pkt: document.getElementById("pkt"),
-//    mainMenu: document.getElementById("contener"),
-//    errSpace: document.getElementById("errSpace"),
+    mainMenu: document.getElementById("contener"),
+    errSpace: document.getElementById("errSpace"),
     iterator: 0,    //zmienne do ustawiana obrazka bomby w odpowiednim miejscu po przejsciu strzalkami
     prevIterator:0,
     flagFirstTime : false,
-//    flagErr: false,
+    flagErr: false,
     choiceCtrl: [],               //eventy dla zmiany opcji sterowania
     
     CtrlCPU: true,
@@ -23,15 +23,17 @@ Intro = {
     imgMenu:function(){             //wczytanie odpowiedniego obrazka menu przy zmiane rozdzielczosci (nie dziala jak powinno)
         var hw = window.innerHeight;
         var vw = window.innerWidth;
+        var mainMenu = document.getElementById("contener");
+        var errSpace = document.getElementById("errSpace");
+//        alert(hw + " , "+vw);
+        //console.log(mainMenu);
         
-       // alert(hw + " , "+vw);
-        
-//        if(hw>vw){                      //tylko landscape  
-//            if(Intro.flagErr){
-//                Intro.mainMenu.classList.remove("disapear");
-//                Intro.errSpace.classList.add("err");
-//                Intro.flagErr = false;
-//            }
+        if(vw>hw){                      //tylko landscape  
+            if(Intro.flagErr){
+                mainMenu.classList.remove("disapear");
+                errSpace.classList.add("err");
+                Intro.flagErr = false;
+            }
             if(vw >= 320 && vw < 480){
                 Intro.imgBomb = "url('intro/img/bomb20.png')";
                 Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
@@ -45,11 +47,11 @@ Intro = {
                 Intro.imgBomb =  "url('intro/img/bomb.png')";
                 Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
             }
-//        }else{
-//            Intro.mainMenu.classList.add("disapear");
-//            Intro.errSpace.classList.remove("err");
-//            Intro.flagErr = true;
-//        }
+        }else{
+            mainMenu.classList.add("disapear");
+            errSpace.classList.remove("err");
+            Intro.flagErr = true;
+        }
     },
     choiceMenu:function(type){
         switch(type){
@@ -100,7 +102,7 @@ Intro = {
                              var s = document.createElement('script');
                              s.src = 'game/js/load.js';
                              document.body.appendChild(s);
-                        },500);
+                        },300);
                        
                         break;
                    case 'STEROWANIE':
@@ -198,7 +200,7 @@ Intro = {
                         Intro.firstTime = true;          //jednorazowe wywolanie tylko by wczytac poczatkowy skrypt, a moze da rade ladniej??
                        setTimeout(function(){
                          Intro.init();
-                       },200);
+                       },500);
                     }else{
                          window.removeEventListener('keyup',Intro.move);   //po właczeniu gry, usuwam nasluchiwacz sterowania menu
                     }

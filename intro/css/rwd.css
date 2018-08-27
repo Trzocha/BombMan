@@ -149,12 +149,17 @@ canvas{
     cursor: pointer;
     font-weight:bold;  
 }
-#errSize{
+#errSpace{
     position: relative;
     top: 40%;
     text-align: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+}
+#errSpace img{
+    height: 200px;
+    margin-top: 20px;
+    
 }
 .disapear, .err{
      display: none;
@@ -224,7 +229,7 @@ canvas{
   
 }
 
-@media (min-width: 400px) and (max-width: 480px) and (min-height: 281px) and (orientation: landscape) {
+@media (max-width: 480px) and (min-height: 281px) and (orientation: landscape) {
     html{
         font-size: 20px;
     }
@@ -304,13 +309,14 @@ canvas{
     }
     #choiceControl{
         height: 85%;
+        font-size: 0.3rem;
     }
     #choiceControl li{
         padding: 0.2rem;
     }
     #description{
-        height: 20%;
-        font-size: 0.4rem;
+        height: 15%;
+        font-size: 0.3rem;
     }
     #buttons{
         bottom: 0.4rem;
@@ -764,7 +770,42 @@ canvas{
         width: 8rem;
         font-size: 0.6rem;
     }
-  
-  
-  
+}
+@media (min-width: 700px) and (max-height:340px) and (orientation: landscape){
+
+    html{
+        font-size: 25px;
+    }
+    #obrazek{
+        font-size: 1.2rem;
+    }
+    #menuu{
+        font-size: 0.5rem;
+        height: 70%;
+    }
+    #menuu #pkt li{
+        list-style: url("../img/emptyBomb20.png");
+        padding: 0.3rem;
+    }
+    #choiceControl{
+        height: 85%;
+        font-size: 0.3rem;
+    }
+    #choiceControl li{
+        padding: 0.2rem;
+    }
+    #description{
+        height: 15%;
+        font-size: 0.3rem;
+    }
+    #buttons{
+        bottom: 0.4rem;
+    }
+    h2{
+        font-size: inherit;
+    }
+    .buttons.intro{
+        bottom: 1rem;
+    }
+    
 }

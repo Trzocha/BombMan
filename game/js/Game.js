@@ -442,6 +442,6 @@ try{
     },100);
     
 }catch(err){
-    alert(err);
+    //alert(err);
     console.log(err);
 }
