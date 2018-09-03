@@ -165,7 +165,7 @@ function Hero(){
     }
     this.x = Game.board.fW;   //x,y ustawia poczatkowe umiejscowienie gracza
     this.y = Game.board.fH;
-    this.life = 2;
+    this.life = 0;
     
     this.rowAndColumn();
 }
@@ -204,8 +204,6 @@ Hero.prototype.setKO = function(){
          this.life--; 
       }
     Game.change_statistic();
-  }else{
-    Game.stop();
   }
 }
 Hero.prototype.afterKO = function(){
@@ -214,9 +212,12 @@ Hero.prototype.afterKO = function(){
     this.y = Game.board.fH;
     this.state = 'down';
   }else{
-      if(!Game.is_over){
+      if(!Game.is_over){      //jedno wykonanie
           Game.is_over = true;
           console.log("gameOver");
+          variableDOM.overSpace.classList.remove("disapear");
+          variableDOM.gameSpace.classList.add("disapear");
+          variableDOM.endPanel.classList.add("visible");
       }  
   }  
 };

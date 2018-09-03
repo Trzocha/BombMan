@@ -44,6 +44,10 @@ variableDOM = {
     classBtnSpace: document.getElementsByClassName('space')[0],
     gameSpace: document.getElementById("Game"),
     errSpace: document.getElementById("errSpace"),
+    overSpace: document.getElementById("over"),
+    endPanel: document.getElementById("endPanel"),
+    buttYES: document.getElementById("buttYES"),
+    buttNO: document.getElementById("buttNO"),
     BtnColor: "#589018",
     
     counterUnfold : 0
@@ -272,11 +276,6 @@ Game = {
                 new Enemy(location.x*Game.board.fW,location.y*Game.board.fH,name_enemy);
             }
     },
-    stop:function(){
-        window.removeEventListener('keydown',Game.onKey);
-        window.removeEventListener('keyup',Game.onKey);
-    },
-    
     onKey:function(ev){
        // console.log(ev.type);
       if(ev.keyCode>=37 && ev.keyCode<=40 || ev.keyCode==32){
@@ -333,7 +332,7 @@ Game = {
                 VAR.scale = 3;
             }else{
                 VAR.scale = 0;
-                alert("Zła rozdzielczość ekranu "+VAR.W+" ,"+VAR.H);
+                alert("Bład rozdzielczości ekranu "+VAR.W+" ,"+VAR.H+" .Prosze napisz do mnie. Abym mogł ulepszyć apliakcje.");
             }
         }else{
             VAR.scale = 0;
@@ -346,9 +345,7 @@ Game = {
 		// Chwilowo do canvas przypiszemy wielkość okna
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
-        //
-        //console.log("GW: "+Game.canvas.width+" ,GH: "+Game.canvas.height);
-        //console.log("GBW: "+Game.board.fW+" ,GBB0: "+Game.board.b[0].length);
+ 
         Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)';
         
         Game.ctx.imageSmoothingEnabled = false;
@@ -361,19 +358,16 @@ Game = {
 	// Funkcja, która odpala się 60 razy na sekundę
 	animationLoop:function(time){
 		requestAnimationFrame( Game.animationLoop );
-    
 		// ograniczenie do ilości klatek zdefiniowanych w właściwości obiektu VAR (nie więcej niż VAR.fps)
-		if(time-VAR.lastTime>=1000/VAR.fps){
-			VAR.lastTime = time;
-			//
-			// oczyszczenie canvas
-			//Game.ctx.clearRect(16,16,VAR.W-16, VAR.H-16);
-            //Game.heroLife.innerHTML = ": "+Game.hero.life;
-            Game.board.draw();  //rysowanie calej mapy
-			for(var o in Game.toDraw){
-                Game.toDraw[o].draw();
+        if(!Game.is_over){
+            if(time-VAR.lastTime>=1000/VAR.fps){
+                VAR.lastTime = time;
+                Game.board.draw();  //rysowanie calej mapy
+                for(var o in Game.toDraw){
+                    Game.toDraw[o].draw();
+                }
             }
-		}
+        }
 	},
     change_statistic:function(){
         Game.heroLife.innerHTML = "Life: "+Game.hero.life;
@@ -405,7 +399,17 @@ Game = {
         if(!start){
              Game.change_statistic();
         }
-
+    },
+    newGame:function(){
+      Game.is_over = false;   //odblokownie animacji 
+      Game.hero.life = 2;
+      VAR.score = 0;
+      VAR.gameLVL = 1;
+      Game.hero.resetBonus();
+        
+      variableDOM.gameSpace.classList.remove("disapear");
+      variableDOM.endPanel.classList.remove("visible");
+      variableDOM.overSpace.classList.add("disapear");
     },
     markGame:function(){
         
@@ -437,7 +441,7 @@ Game = {
 }
 
 try{
-    setTimeout(function(){
+    setTimeout(function(){  //zapobiegawczo aby htlm sie wczytał
         Game.init();
     },100);
     

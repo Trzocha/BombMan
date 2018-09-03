@@ -2,6 +2,14 @@
     <p>Aplikacja przystosowana do orientacji pionowej ekranu</p>
     <img src="game/img/rotation.png">
 </div>
+<div id="over" class="disapear gameOver">
+    <b>Game Over</b>
+    <div id="endPanel">
+        <p>Retry?</p>
+        <button id="buttYES">YES</button>
+        <button id="buttNO">NO</button>
+    </div>
+</div>
 <div id="Game">
     <div id="markGame"></div>
 
