@@ -2,8 +2,8 @@
     
    <ul >
         <li>&larr; &ndash; lewo</li >
-        <li>&rarr; &ndash; prawo</li >
-        <li>&darr; &ndash; gora</li >
         <li>&uarr; &ndash; dol</li >
+        <li>&darr; &ndash; gora</li >
+        <li>&rarr; &ndash; prawo</li >
         <li>BomB &ndash; spacja</li >
     </ul>

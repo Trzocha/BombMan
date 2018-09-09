@@ -92,12 +92,11 @@ function Board(){
                     this.array_Bonus.push(this.addBonus(bonusType));
                     VAR.bonus++;
                 }else{ //debug
-                    console.log("Nieudalo sie "+bonusType);
+                    //console.log("Nieudalo sie "+bonusType);
                 }
             }
         }
-    }
-    
+    }  
 }
 Board.prototype.draw = function(){
     

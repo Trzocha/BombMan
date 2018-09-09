@@ -163,7 +163,7 @@ canvas{
 }
 #errSpace{
     position: relative;
-    top: 40%;
+/*    top: 40%;*/
     text-align: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
@@ -180,24 +180,6 @@ canvas{
     font-size: 3rem;
     -webkit-animation: scale-in-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: scale-in-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-.gameOver b{
-/*
-   -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-   animation: scale-in-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-*/
-}
-#over{
-/*
-   display: -webkit-box;
-   display: -ms-flexbox;
-   display: flex;
-   -webkit-box-pack: center;
-   -ms-flex-pack: center;
-   justify-content: center;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-*/
 }
 #endPanel{
     text-align: center;

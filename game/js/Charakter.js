@@ -165,7 +165,7 @@ function Hero(){
     }
     this.x = Game.board.fW;   //x,y ustawia poczatkowe umiejscowienie gracza
     this.y = Game.board.fH;
-    this.life = 0;
+    this.life = 2;
     
     this.rowAndColumn();
 }
@@ -217,7 +217,16 @@ Hero.prototype.afterKO = function(){
           console.log("gameOver");
           variableDOM.overSpace.classList.remove("disapear");
           variableDOM.gameSpace.classList.add("disapear");
+         // variableDOM.gameSpace.removeChild(document.getElementsByTagName("canvas"));
           variableDOM.endPanel.classList.add("visible");
+          variableDOM.buttYES.addEventListener("click",Game.newGame);
+          variableDOM.buttNO.addEventListener("click",function(){
+              Intro.flagMenuAgain = true;
+              Intro.changePage('BODY',"intro/ajax/intro.txt");   
+                setTimeout(function(){
+                    Intro.init();
+                },100);
+          });
       }  
   }  
 };
@@ -460,7 +469,7 @@ Enemy.prototype.afterKO = function(){
         break;
     }
     if(!some_enemy){
-        Game.lvlUP();
+        setTimeout(function(){ Game.lvlUP();},1000);
     }
 };
 Enemy.prototype.change = function(type){

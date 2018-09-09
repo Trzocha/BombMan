@@ -7,6 +7,7 @@ Intro = {
     prevIterator:0,
     flagFirstTime : false,
     flagErr: false,
+    flagMenuAgain: false,        //flaga rozpoczecia kolejnej gry przez menu
     choiceCtrl: [],               //eventy dla zmiany opcji sterowania
     
     CtrlCPU: true,
@@ -98,12 +99,11 @@ Intro = {
             switch(Intro.menu[Intro.iterator].innerText){
                    case 'START':
                         Intro.changePage('BODY',"intro/ajax/Start.txt");
-                        setTimeout(function(){                          //ze wzgl na opznienia wczytania sie nowego modułu strony
-                             var s = document.createElement('script');
-                             s.src = 'game/js/load.js';
-                             document.body.appendChild(s);
-                        },300);
-                       
+                            setTimeout(function(){                          //ze wzgl na opznienia wczytania sie nowego modułu strony
+                                 var s = document.createElement('script');
+                                 s.src = 'game/js/load.js';
+                                 document.body.appendChild(s);
+                            },300);
                         break;
                    case 'STEROWANIE':
                         Intro.changePage('menuu',"intro/ajax/Sterowanie.txt");

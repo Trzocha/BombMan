@@ -14,10 +14,10 @@
     <div id="markGame"></div>
 
      <ul class="buttons game">
-        <li class="left">&larr;</li >
-        <li  class="right">&rarr;</li >
-        <li  class="down">&darr;</li >
+        <li  class="left">&larr;</li >
         <li  class="up">&uarr;</li >
+        <li  class="down">&darr;</li >
+        <li  class="right">&rarr;</li >
         <li  class="space">BomB</li >
     </ul>
 

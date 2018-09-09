@@ -1,13 +1,10 @@
 // Obiekt, w którym będą przechowywane „podręczne” wartości
 VAR = {
-	fps:15,// animacja w Bombermenie nie była tak płynna jak we współczesnych grach
+	fps:15,
 	W:0,// szerokość okna
 	H:0,// wysokość okna
 	scale:0,// elementy gry będą wklejane w odpowiedniej skali
-	//
 	lastTime:0,
-//    enemy:4,    //do zmiany
-//    crate:20,
     bonus:0,
     gameLVL:1,
     score: 0,
@@ -52,8 +49,6 @@ variableDOM = {
     
     counterUnfold : 0
 }
-// Obiekt zawierający bazowe funckje związane z grą.
-// Game nie ma konstruktora, jest jedynie obiektem grupującym funkcje.
 Game = {
     
     lvlArrayEnemy : [   //tablica liczebnosci i rodzaju potworow wdg poziomu
@@ -85,186 +80,160 @@ Game = {
 		Game.canvas = document.createElement('canvas');
 		// Przypisuję kontekst 2D do zmiennej ctx, która jest właściwością obiektu Game
 		Game.ctx = Game.canvas.getContext('2d');
-        variableDOM.gameSpace.appendChild(Game.canvas);
+        document.getElementById("Game").appendChild(Game.canvas);
         Game.board = new Board();
 		// odpalam mametodę obiektu Game
 		Game.layout();
 		// metoda layout odpali się przy każdej zmianie wielkości okna
 		window.addEventListener('resize', Game.layout, false);
-		// Canvas zostaje dodany do DOM
         
-//		document.getElementById("Game").appendChild(Game.canvas);
-//        variableDOM.gameSpace.appendChild(Game.canvas);
-//        console.log(variableDOM.gameSpace);
         Game.toDraw = {};  //obiekt w którym wrzucane są obrazki do animowania
         Game.hero = new Hero();
         
         Game.lvlUP(true);
         
-        window.addEventListener('keydown',Game.onKey,false);
-        window.addEventListener('keyup',Game.onKey,false);
-        
-        //--------------------------------------------------------------Touch
-        variableDOM.classBtnUp.addEventListener("touchstart",function(){
-            Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnUp.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnUp.addEventListener("touchend",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnUp.style.background = "";
-        });
-          
-        variableDOM.classBtnDown.addEventListener("touchstart",function(){
-            Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnDown.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnDown.addEventListener("touchend",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnDown.style.background = "";
-        });
-        
-        variableDOM.classBtnRight.addEventListener("touchstart",function(e){
-            e.stopPropagation();
-            Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnRight.style.background = variableDOM.BtnColor;
-        },true);
-        
-        variableDOM.classBtnRight.addEventListener("touchend",function(){
-            setTimeout(function(){
-                Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
-            },50);
-           // Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
-            //variableDOM.classBtnRight.style.background = "";
-        });
-        
-        variableDOM.classBtnLeft.addEventListener("touchstart",function(){
-            Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnLeft.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnLeft.addEventListener("touchend",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnLeft.style.background = "";
-        });
-        
-        variableDOM.classBtnSpace.addEventListener("touchstart",function(){
-            Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnSpace.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnSpace.addEventListener("touchend",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnSpace.style.background = "";
-        });
-        
-        //----------------------------------------------------------------- Mouse
-        variableDOM.classBtnUp.addEventListener("mousedown",function(){
-            Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnUp.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnUp.addEventListener("mouseup",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnUp.style.background = "";
-        });
-          
-        variableDOM.classBtnDown.addEventListener("mousedown",function(){
-            Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnDown.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnDown.addEventListener("mouseup",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnDown.style.background = "";
-        });
-        
-        variableDOM.classBtnRight.addEventListener("mousedown",function(e){
-            e.stopPropagation();
-            Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnRight.style.background = variableDOM.BtnColor;
-        },true);
-        
-        variableDOM.classBtnRight.addEventListener("mouseup",function(){
-            setTimeout(function(){
-                Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
-            },50);
-           // Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
-            //variableDOM.classBtnRight.style.background = "";
-        });
-        
-        variableDOM.classBtnLeft.addEventListener("mousedown",function(){
-            Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnLeft.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnLeft.addEventListener("mouseup",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnLeft.style.background = "";
-        });
-        
-        variableDOM.classBtnSpace.addEventListener("mousedown",function(){
-            Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
-            //variableDOM.classBtnSpace.style.background = variableDOM.BtnColor;
-        });
-        variableDOM.classBtnSpace.addEventListener("mouseup",function(){
-             setTimeout(function(){
-                Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
-            },50);
-            //variableDOM.classBtnSpace.style.background = "";
-        });
-        
-        variableDOM.idSetting.addEventListener("click",function(){
-            if(variableDOM.counterUnfold%2 == 0){
-                if(variableDOM.counterUnfold == 0){
-                    variableDOM.idUnfold.firstElementChild.style.background ='green';
-                    variableDOM.idUnfold.lastElementChild.style.background = 'red';
+        //if(!Intro.flagMenuAgain){
+            window.addEventListener('keydown',Game.onKey,false);
+            window.addEventListener('keyup',Game.onKey,false);
+        //}
+            //--------------------------------------------------------------Touch
+            variableDOM.classBtnUp.addEventListener("touchstart",function(){
+                Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnUp.addEventListener("touchend",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnDown.addEventListener("touchstart",function(){
+                Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnDown.addEventListener("touchend",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnRight.addEventListener("touchstart",function(e){
+                e.stopPropagation();
+                Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
+            },true);
+
+            variableDOM.classBtnRight.addEventListener("touchend",function(){
+                setTimeout(function(){
+                    Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnLeft.addEventListener("touchstart",function(){
+                Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnLeft.addEventListener("touchend",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnSpace.addEventListener("touchstart",function(){
+                Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnSpace.addEventListener("touchend",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            //----------------------------------------------------------------- Mouse
+            variableDOM.classBtnUp.addEventListener("mousedown",function(){
+                Game.onKey({keyCode : 38,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnUp.addEventListener("mouseup",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 38,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnDown.addEventListener("mousedown",function(){
+                Game.onKey({keyCode : 40,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnDown.addEventListener("mouseup",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 40,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnRight.addEventListener("mousedown",function(e){
+                e.stopPropagation();
+                Game.onKey({keyCode : 39,type : 'keydown',mouse:'true'});
+            },true);
+
+            variableDOM.classBtnRight.addEventListener("mouseup",function(){
+                setTimeout(function(){
+                    Game.onKey({keyCode : 39,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnLeft.addEventListener("mousedown",function(){
+                Game.onKey({keyCode : 37,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnLeft.addEventListener("mouseup",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 37,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.classBtnSpace.addEventListener("mousedown",function(){
+                Game.onKey({keyCode : 32,type : 'keydown',mouse:'true'});
+            });
+            variableDOM.classBtnSpace.addEventListener("mouseup",function(){
+                 setTimeout(function(){
+                    Game.onKey({keyCode : 32,type : 'keyup',mouse:'true'});
+                },50);
+            });
+
+            variableDOM.idSetting.addEventListener("click",function(){
+                if(variableDOM.counterUnfold%2 == 0){
+                    if(variableDOM.counterUnfold == 0){
+                        variableDOM.idUnfold.firstElementChild.style.background ='green';
+                        variableDOM.idUnfold.lastElementChild.style.background = 'red';
+                    }
+                    variableDOM.idSetting.style.background = variableDOM.BtnColor;
+                    variableDOM.idSetting.style.height = "auto";
+                    variableDOM.idUnfold.style.visibility = "visible";
+                }else{
+                  variableDOM.idSetting.style.background = "";
+                  variableDOM.idSetting.style.height = "";
+                  variableDOM.idUnfold.style.visibility = "hidden";  
                 }
-                variableDOM.idSetting.style.background = variableDOM.BtnColor;
-                variableDOM.idSetting.style.height = "auto";
-                variableDOM.idUnfold.style.visibility = "visible";
-            }else{
-              variableDOM.idSetting.style.background = "";
-              variableDOM.idSetting.style.height = "";
-              variableDOM.idUnfold.style.visibility = "hidden";  
-            }
-            variableDOM.counterUnfold++;         
-        });
-        
-        if(Intro.CtrlMOBILE){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
-            variableDOM.idUnfold.lastElementChild.style.background = 'green';
-            variableDOM.idUnfold.firstElementChild.style.background = 'red';
-            variableDOM.classButtons.style.visibility = 'visible';
-        }
-        
-       variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){    //wybor sterowania bohaterem
-           ev.stopPropagation();
-            if(variableDOM.idUnfold.firstElementChild.style.background == 'red'){
-                variableDOM.idUnfold.firstElementChild.style.background = 'green';
-                variableDOM.idUnfold.lastElementChild.style.background = 'red';
-                variableDOM.classButtons.style.visibility = 'hidden';
-            }
-        });    
-        
-       variableDOM.idUnfold.lastElementChild.addEventListener("click",function(ev){
-           ev.stopPropagation();
-            if( variableDOM.idUnfold.lastElementChild.style.background == 'red'){
+                variableDOM.counterUnfold++;         
+            });
+
+            if(Intro.CtrlMOBILE){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
                 variableDOM.idUnfold.lastElementChild.style.background = 'green';
                 variableDOM.idUnfold.firstElementChild.style.background = 'red';
                 variableDOM.classButtons.style.visibility = 'visible';
             }
-        });
+
+           variableDOM.idUnfold.firstElementChild.addEventListener("click",function(ev){    //wybor sterowania bohaterem
+               ev.stopPropagation();
+                if(variableDOM.idUnfold.firstElementChild.style.background == 'red'){
+                    variableDOM.idUnfold.firstElementChild.style.background = 'green';
+                    variableDOM.idUnfold.lastElementChild.style.background = 'red';
+                    variableDOM.classButtons.style.visibility = 'hidden';
+                }
+            });    
+
+           variableDOM.idUnfold.lastElementChild.addEventListener("click",function(ev){
+               ev.stopPropagation();
+                if( variableDOM.idUnfold.lastElementChild.style.background == 'red'){
+                    variableDOM.idUnfold.lastElementChild.style.background = 'green';
+                    variableDOM.idUnfold.firstElementChild.style.background = 'red';
+                    variableDOM.classButtons.style.visibility = 'visible';
+                }
+            });
         
         Game.markGame();        //oznaczenia do gry
-        // rozpoczęcie pętli gry
 		Game.animationLoop();
 	},
     space:function(location,name_enemy){ //funkcja sprawdzajaca obszar gdzie mialby pojawic sie enemy, jak obszar jest za blisko enemy wybierany jest nowy
@@ -277,7 +246,6 @@ Game = {
             }
     },
     onKey:function(ev){
-       // console.log(ev.type);
       if(ev.keyCode>=37 && ev.keyCode<=40 || ev.keyCode==32){
           if(!ev.mouse)
             ev.preventDefault();
@@ -301,10 +269,8 @@ Game = {
       }  
     },
 	layout:function(ev){
-		// Dla łatwiejszego pisania wielkość okna zostaje przypisana do właściwości W i H obiektu VAR
 		VAR.W = window.innerWidth;
 		VAR.H = window.innerHeight;
-        
         
         if(VAR.W>VAR.H){
             if(VAR.flagErr){
@@ -341,8 +307,6 @@ Game = {
             VAR.flagErr = true;
         }
         
-        console.log(VAR.scale);
-		// Chwilowo do canvas przypiszemy wielkość okna
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
  
@@ -355,14 +319,12 @@ Game = {
         
         Game.board.temp_board = false;                    //zmienna pomocnicza aby przy zmianie rozmiaru okna tylko raz narysowac jeszcze raz cala mape(zbedne??)
 	},
-	// Funkcja, która odpala się 60 razy na sekundę
 	animationLoop:function(time){
 		requestAnimationFrame( Game.animationLoop );
-		// ograniczenie do ilości klatek zdefiniowanych w właściwości obiektu VAR (nie więcej niż VAR.fps)
         if(!Game.is_over){
             if(time-VAR.lastTime>=1000/VAR.fps){
                 VAR.lastTime = time;
-                Game.board.draw();  //rysowanie calej mapy
+                Game.board.draw();
                 for(var o in Game.toDraw){
                     Game.toDraw[o].draw();
                 }
@@ -377,7 +339,7 @@ Game = {
     },
     
     lvlUP:function(start){
-        if(!start){       //przy starcie gry niepotrzebne
+        if(!start){       //przy pierwszym uruchomienu gry niepotrzebne
             VAR.gameLVL++;
             Game.board = new Board();   
             Game.hero.x = Game.board.fW; //ustawienie bohatera
@@ -406,10 +368,17 @@ Game = {
       VAR.score = 0;
       VAR.gameLVL = 1;
       Game.hero.resetBonus();
+      Game.change_statistic();
+      Game.board = new Board();
         
       variableDOM.gameSpace.classList.remove("disapear");
       variableDOM.endPanel.classList.remove("visible");
       variableDOM.overSpace.classList.add("disapear");
+      
+      variableDOM.buttNO.removeEventListener("click",function(){
+          
+      });
+      variableDOM.buttYES.removeEventListener("click",Game.newGame);
     },
     markGame:function(){
         
@@ -446,6 +415,5 @@ try{
     },100);
     
 }catch(err){
-    //alert(err);
     console.log(err);
 }

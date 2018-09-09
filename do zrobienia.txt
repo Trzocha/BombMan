@@ -1,0 +1,25 @@
+poziomy //w trakcie
+ekran wczytywania //w trakcie
+dzwi   //nie bedzie
+aktualne parametry z gry //w trakcie
+zapisywanie wynikow do bazy
+praca nad szybkoscia dzia³ania
+rozpoznawanie mobile czy cpu do sterowania bohaterem
+na przycisk detonacja bomb
+
+Bledy:
+przy modzie ghost mona stawiac bomby na mur oraz skrzynki
+
+przy wybuchu bonusu nie aktuaizuje sie liczba stworkow //zrobione
+
+za szybke przejscie z poziomu na poziom   //zrobine
+
+trudnosc potworow mozna zwiekszyc przez zmiane tabeli zmiany kierunkow  //zrobine
+
+roznorodnosc potworow,skrzynek,bonusow wraz ze zmiana poziomu //zrobione
+
+przycisk NO blad przy funkcji draw() (bonusy?) //potwierdzone
+przycisk YES  blad taki ze zostaje stara mapa canvas, nie resetuje sie od zera     //usuniete
+przycisk "?" przy ponownym uruchomienu nie wysuwa sie   //usuniete
+czasami dziwne puste punkty przy wybuchu bomby
+zbyt szybkie przejsciu z menu poprzycisku NO do nowej gry wczytuje , efekt podwojnego html
