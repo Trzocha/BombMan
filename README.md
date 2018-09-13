@@ -1,2 +1,8 @@
 # BM
-BM game
+BombMan Game
+
+Wykorzystane:
+-Ajax;
+-JS;
+-RWD
+-Canvas
