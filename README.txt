@@ -1,4 +1,4 @@
-# BM
+
 BombMan Game
 
 Wykorzystane przy projekcie:
