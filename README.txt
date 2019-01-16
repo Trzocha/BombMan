@@ -9,3 +9,5 @@ Wykorzystane przy projekcie:
 Gra lepiej sterowalna jest z klawiatury, ale na mobile tez radzi sobie dobrze.
 
 Posiada kilka ukrytych wad, nad którymi zamierzam popracować.
+
+Demo: www.stwebrider.ovh/strony/BombMan
