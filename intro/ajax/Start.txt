@@ -21,7 +21,7 @@
         <li  class="space">BomB</li >
     </ul>
 
-    <div id="setting">?
+    <div id="setting" class="fas fa-cog">
         <ul id="unfold">
             <li>Tryb komputerowy</li>
             <li>Tryb komorkowy</li>
