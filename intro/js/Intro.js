@@ -24,6 +24,7 @@ Intro = {
     imgMenu:function(){             //wczytanie odpowiedniego obrazka menu przy zmiane rozdzielczosci (nie dziala jak powinno)
         var hw = window.innerHeight;
         var vw = window.innerWidth;
+//        alert(hw + " : "+vw);
         var mainMenu = document.getElementById("contener");
         var errSpace = document.getElementById("errSpace");
 //        alert(hw + " , "+vw);

@@ -63,7 +63,7 @@ Character.prototype.rowAndColumn = function(){ //metoda sprawdzajaca kolejny obs
                 Game.board.b[this.row][this.column] = Board.elements.floor;
             }else{
                 Game.board.b[this.row][this.column] = Board.elements.floor;
-                if(!(this.spped>3))
+                if(!(this.spped>4))
                     this.speed++;       //bohater
             }
             break;

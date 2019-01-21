@@ -1,6 +1,6 @@
 // Obiekt, w którym będą przechowywane „podręczne” wartości
 VAR = {
-	fps:15,
+	fps:18,
 	W:0,// szerokość okna
 	H:0,// wysokość okna
 	scale:0,// elementy gry będą wklejane w odpowiedniej skali
@@ -9,6 +9,7 @@ VAR = {
     gameLVL:1,
     score: 0,
     flagErr: false,
+    isMobile: false,
     
 	rand:function(min,max){
 		return Math.floor(Math.random()*(max-min+1))+min;
@@ -209,7 +210,7 @@ Game = {
                 variableDOM.counterUnfold++;         
             });
 
-            if(Intro.CtrlMOBILE){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
+            if(Intro.CtrlMOBILE || VAR.isMobile){           //Gdy w menu glownym wybiore sterowanie mobile przy wczytaniu gry laduje przyciski
                 variableDOM.idUnfold.lastElementChild.style.background = 'green';
                 variableDOM.idUnfold.firstElementChild.style.background = 'red';
                 variableDOM.classButtons.style.visibility = 'visible';
@@ -278,20 +279,23 @@ Game = {
                 variableDOM.errSpace.classList.add("err");
                 VAR.flagErr = false;
             }
-            if(VAR.W >= 320 && VAR.W <=767 && VAR.H >=240){
-                if(VAR.W>470 && VAR.W <=800 && VAR.H>=460){
+            if(VAR.W >= 320 && VAR.W <=767 && VAR.H >=230){
+                if(VAR.W>470 && VAR.W <=767 && VAR.H>=460){
                     VAR.scale = 1.5;
                 }else{
                    VAR.scale = 1; 
                 }
+                VAR.isMobile = true;
             }else if(VAR.W>470 && VAR.W <=800 && VAR.H>=460){
                 VAR.scale = 1.5;
+                VAR.isMobile = true;
             }else if(VAR.W > 800 && VAR.W <=1000 && VAR.H>=430){
                 if(VAR.H < 520){
                     VAR.scale = 1.5;
                 }else{
                     VAR.scale = 2;
                 }
+                VAR.isMobile = true;
             }else if(VAR.W > 1000 && VAR.W <=1400 && VAR.H>620){
                 VAR.scale = 2.5
             }else if(VAR.W> 1400 && VAR.H>620){
@@ -310,7 +314,7 @@ Game = {
 		Game.canvas.width = VAR.scale*Game.board.fW*Game.board.b[0].length;
 		Game.canvas.height = VAR.scale*Game.board.fH*Game.board.b.length;
  
-        Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/2)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)';
+        Game.canvas.style[Modernizr.prefixed('transform')] = 'translate('+Math.round((VAR.W-Game.canvas.width)/3)+'px,'+Math.round((VAR.H-Game.canvas.height)/2)+'px)';
         
         Game.ctx.imageSmoothingEnabled = false;
         Game.ctx.mozImageSmoothingEnabled = false;
