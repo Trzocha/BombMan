@@ -13,18 +13,15 @@
 <div id="Game">
     <div id="markGame"></div>
 
-     <ul class="buttons game">
-        <li  class="left">&larr;</li >
-        <li  class="up">&uarr;</li >
-        <li  class="down">&darr;</li >
-        <li  class="right">&rarr;</li >
-        <li  class="space">BomB</li >
-    </ul>
-
-    <div id="setting" class="fas fa-cog">
-        <ul id="unfold">
-            <li>Tryb komputerowy</li>
-            <li>Tryb komorkowy</li>
-        </ul>
+    <div id="canvasArea">
+    <div class="buttons game">
+        <div class="controler">
+            <span  class="left">&larr;</span >
+            <span  class="up">&uarr;</span >
+            <span  class="down">&darr;</span >
+            <span  class="right">&rarr;</span >
+        </div>
+        <span  class="space">BomB</span >
+        </div>
     </div>
 </div>

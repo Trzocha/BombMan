@@ -488,14 +488,46 @@ canvas{
         bottom: 1rem;
     }
     .buttons.game{
-        bottom: 1rem;
-        font-size: 0.4rem;
+
+        font-size: 0.5rem;
+        height: 8rem;
+        width: 5rem;
+        top:50%;
+        right: 0;
+        -webkit-transform: translate(-40%,-40%);
+        transform: translate(-40%,-40%);
+    }
+    .up , .down, .left, .right{
+        position: absolute;
+        height: 0.8rem;
+        width: 0.8rem;
+    }
+    .up, .down{
+        left:2rem;
+    }
+    .up{
+        top:2rem;
+    }
+    .down{
+        top: 4rem;
+    }
+    .left , .right{
+        top:3rem;
+    }
+    .left{
+        left:0.5rem;
+    }
+    .right{
+        right: 0.5rem;
     }
     .space{
-        width: 4rem;
-    }
-    .left, .right,.down, .up, .space{
-        margin: 0 1rem 0 1rem;
+        position: absolute;
+        height: 0.8rem;
+        width: 3rem;
+        left:50%;
+        bottom: 1rem;
+        -webkit-transform: translate(-50%,0);
+        transform: translate(-50%,0);
     }
      #markGame{
         font-size: 0.5rem;
@@ -590,7 +622,7 @@ canvas{
 }
 
 
-@media (min-width: 671px) and (max-width: 1024px) and (min-height:360px) and (orientation: landscape){   /*767*/
+@media (min-width: 671px) and (max-width: 1024px) and (min-height:330px) and (orientation: landscape){   /*767*/
     
     html{
         font-size: 25px;

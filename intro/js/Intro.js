@@ -36,13 +36,14 @@ Intro = {
                 errSpace.classList.add("err");
                 Intro.flagErr = false;
             }
-            if(vw >= 320 && vw < 480){
-                Intro.imgBomb = "url('intro/img/bomb20.png')";
-                Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-            }else if(vw >= 480 && vw < 768){
-                Intro.imgBomb =  "url('intro/img/bomb20.png')";
-                Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
-            }else if(vw >= 768 && vw < 1024){
+            // if(vw >= 320 && vw < 480){
+            //     Intro.imgBomb = "url('intro/img/bomb20.png')";
+            //     Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            // }else if(vw >= 480 && vw < 768){
+            //     Intro.imgBomb =  "url('intro/img/bomb20.png')";
+            //     Intro.imgEmptyBomb = "url('intro/img/emptyBomb20.png')";
+            // }else 
+            if(vw >= 768 && vw < 1024){
                 Intro.imgBomb =  "url('intro/img/bomb.png')";
                 Intro.imgEmptyBomb = "url('intro/img/emptyBomb.png')";
             }else if(vw >= 1024){

@@ -1,0 +1,128 @@
+@import "intro";
+@import "game";
+* {
+  margin: 0;
+  padding: 0;
+  //   box-sizing: border-box;
+}
+html {
+  font-family: "Orbitron", sans-serif;
+  font-size: 10px;
+}
+body,
+#contener,
+#Game {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-line-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (max-width: 400px) and (max-height: 280px) {
+  #obrazek {
+    h1 {
+      font-size: 3.5rem;
+    }
+  }
+  #menuu {
+    height: 70%;
+    #pkt {
+      li {
+        list-style: none;
+        margin-top: 0.7rem;
+        font-size: 1rem;
+      }
+    }
+  }
+  #markGame {
+    position: absolute;
+    top: 2rem;
+    transform: translate(10%, -40%);
+    div {
+      font-size: 1.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+  #canvasArea {
+    bottom: 0.5rem;
+  }
+  .buttons.game {
+    flex-basis: 30%;
+  }
+  canvas {
+    flex-basis: 70%;
+  }
+  .up,
+  .down,
+  .left,
+  .right {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .left {
+    transform: translate(-150%, -50%);
+  }
+  .right {
+    transform: translate(150%, -50%);
+  }
+}
+@media (max-width: 480px) and (min-height: 281px) {
+  #obrazek {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+  #menuu {
+    height: 70%;
+    #pkt {
+      li {
+        list-style: none;
+        margin-top: 0.8rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+  #markGame {
+    position: absolute;
+    top: 2rem;
+    transform: translate(10%, -40%);
+    div {
+      font-size: 1.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+  #canvasArea {
+    bottom: 2rem;
+    left: 2rem;
+  }
+  .buttons.game {
+    flex-basis: 40%;
+  }
+  canvas {
+    flex-basis: 60%;
+  }
+  .up,
+  .down,
+  .left,
+  .right {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .left {
+    transform: translate(-170%, -50%);
+  }
+  .right {
+    transform: translate(170%, -50%);
+  }
+}
