@@ -303,36 +303,43 @@ Game = {
         variableDOM.errSpace.classList.add("err");
         VAR.flagErr = false;
       }
-      if (VAR.W >= 320 && VAR.W <= 767 && VAR.H >= 230) {
-        if (VAR.W > 470 && VAR.W <= 767 && VAR.H >= 460) {
-          VAR.scale = 1.5;
-        } else {
-          VAR.scale = 1;
-        }
+      // if (VAR.W >= 320 && VAR.W <= 767 && VAR.H >= 230) {
+      //   if (VAR.W > 470 && VAR.W <= 767 && VAR.H >= 460) {
+      //     VAR.scale = 1.5;
+      //   } else {
+      //     VAR.scale = 1;
+      //   }
+      //   VAR.isMobile = true;
+      // } else if (VAR.W > 470 && VAR.W <= 800 && VAR.H >= 460) {
+      //   VAR.scale = 1.5;
+      //   VAR.isMobile = true;
+      // } else if (VAR.W > 800 && VAR.W <= 1000 && VAR.H >= 430) { //H do 330px
+      //   if (VAR.H < 520) {
+      //     VAR.scale = 1.5;
+      //   } else {
+      //     VAR.scale = 2;
+      //   }
+      //   VAR.isMobile = true;
+      // } else if (VAR.W > 1000 && VAR.W <= 1400 && VAR.H > 620) {
+      //   VAR.scale = 2.5;
+      // } else if (VAR.W > 1400 && VAR.H > 620) {
+      //   VAR.scale = 3;
+      // } else {
+      //   VAR.scale = 0;
+      //   alert(
+      //     "Bład rozdzielczości ekranu " +
+      //       VAR.W +
+      //       " ," +
+      //       VAR.H +
+      //       " .Prosze napisz do mnie. Abym mogł ulepszyć apliakcje."
+      //   );
+      // }
+
+      if (VAR.W >= 320 && VAR.W <= 700 && VAR.H <= 280) {
+        VAR.scale=1;
         VAR.isMobile = true;
-      } else if (VAR.W > 470 && VAR.W <= 800 && VAR.H >= 460) {
-        VAR.scale = 1.5;
-        VAR.isMobile = true;
-      } else if (VAR.W > 800 && VAR.W <= 1000 && VAR.H >= 430) {
-        if (VAR.H < 520) {
-          VAR.scale = 1.5;
-        } else {
-          VAR.scale = 2;
-        }
-        VAR.isMobile = true;
-      } else if (VAR.W > 1000 && VAR.W <= 1400 && VAR.H > 620) {
-        VAR.scale = 2.5;
-      } else if (VAR.W > 1400 && VAR.H > 620) {
-        VAR.scale = 3;
       } else {
         VAR.scale = 0;
-        alert(
-          "Bład rozdzielczości ekranu " +
-            VAR.W +
-            " ," +
-            VAR.H +
-            " .Prosze napisz do mnie. Abym mogł ulepszyć apliakcje."
-        );
       }
     } else {
       VAR.scale = 0;

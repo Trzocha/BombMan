@@ -115,7 +115,8 @@ body {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  left: 0.5rem;
+  bottom: 0rem;
+  left: 0rem;
 }
 
 #canvasArea .buttons.game {
@@ -135,37 +136,8 @@ body {
   position: absolute;
 }
 
-#canvasArea .buttons.game .controler .up,
-#canvasArea .buttons.game .controler .down {
-  left: 50%;
-  -webkit-transform: translate(-50%, 0%);
-          transform: translate(-50%, 0%);
-}
-
-#canvasArea .buttons.game .controler .left,
-#canvasArea .buttons.game .controler .right {
-  top: 50%;
-}
-
-#canvasArea .buttons.game .controler .up {
-  top: 0;
-}
-
 #canvasArea .buttons.game .controler .down {
   bottom: 0;
-}
-
-#canvasArea .buttons.game .controler .left {
-  left: 50%;
-}
-
-#canvasArea .buttons.game .controler .right {
-  right: 50%;
-}
-
-#canvasArea .buttons.game .space {
-  bottom: -2rem;
-  left: 30%;
 }
 
 #canvasArea canvas {
@@ -323,7 +295,7 @@ body {
   align-items: center;
 }
 
-@media (max-width: 400px) and (max-height: 280px) {
+@media (max-width: 700px) and (max-height: 280px) {
   #obrazek h1 {
     font-size: 3.5rem;
   }
@@ -337,90 +309,252 @@ body {
   }
   #markGame {
     position: absolute;
-    top: 2rem;
-    -webkit-transform: translate(10%, -40%);
-            transform: translate(10%, -40%);
+    top: 3rem;
+    -webkit-transform: translate(25%, -70%);
+            transform: translate(25%, -70%);
   }
   #markGame div {
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
+    font-size: 1.3rem;
+    margin-right: 4rem;
   }
-  #canvasArea {
-    bottom: 0.5rem;
+  #canvasArea .buttons.game {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+    padding: 0 0 2rem 0;
   }
-  .buttons.game {
-    -ms-flex-preferred-size: 30%;
-        flex-basis: 30%;
-  }
-  canvas {
-    -ms-flex-preferred-size: 70%;
-        flex-basis: 70%;
-  }
-  .up,
-  .down,
-  .left,
-  .right {
+  #canvasArea .buttons.game .controler .up,
+  #canvasArea .buttons.game .controler .down,
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
     width: 1.5rem;
     height: 1.5rem;
   }
-  .left {
-    -webkit-transform: translate(-150%, -50%);
-            transform: translate(-150%, -50%);
+  #canvasArea .buttons.game .controler .up {
+    left: 70%;
+    top: 0;
+    -webkit-transform: translate(-50%, -20%);
+            transform: translate(-50%, -20%);
   }
-  .right {
-    -webkit-transform: translate(150%, -50%);
-            transform: translate(150%, -50%);
+  #canvasArea .buttons.game .controler .down {
+    left: 70%;
+    -webkit-transform: translate(-50%, 20%);
+            transform: translate(-50%, 20%);
+  }
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
+    left: 70%;
+  }
+  #canvasArea .buttons.game .controler .left {
+    -webkit-transform: translate(-170%, 90%);
+            transform: translate(-170%, 90%);
+  }
+  #canvasArea .buttons.game .controler .right {
+    -webkit-transform: translate(80%, 90%);
+            transform: translate(80%, 90%);
+  }
+  #canvasArea .buttons.game .space {
+    bottom: -3rem;
+    padding: 0 2.5rem;
+    left: 55%;
+  }
+  #canvasArea canvas {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+    padding: 0 0 1rem 10rem;
   }
 }
 
-@media (max-width: 480px) and (min-height: 281px) {
+@media (max-width: 550px) and (max-height: 280px) {
+  html {
+    color: red;
+  }
   #obrazek h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   #menuu {
     height: 70%;
   }
   #menuu #pkt li {
     list-style: none;
-    margin-top: 0.8rem;
-    font-size: 1.3rem;
+    margin-top: 0.7rem;
+    font-size: 1rem;
   }
   #markGame {
     position: absolute;
-    top: 2rem;
+    top: 3rem;
+    -webkit-transform: translate(25%, -70%);
+            transform: translate(25%, -70%);
+  }
+  #markGame div {
+    font-size: 1.3rem;
+    margin-right: 4rem;
+  }
+  #canvasArea .buttons.game {
+    -ms-flex-preferred-size: 40%;
+        flex-basis: 40%;
+    padding: 0 0 2rem 0;
+  }
+  #canvasArea .buttons.game .controler .up,
+  #canvasArea .buttons.game .controler .down,
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  #canvasArea .buttons.game .controler .up,
+  #canvasArea .buttons.game .controler .down {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+    left: 50%;
+  }
+  #canvasArea .buttons.game .controler .up {
+    top: 0;
+  }
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
+    top: 50%;
+  }
+  #canvasArea .buttons.game .controler .left {
+    left: 50%;
+    -webkit-transform: translate(-150%, -50%);
+            transform: translate(-150%, -50%);
+  }
+  #canvasArea .buttons.game .controler .right {
+    left: 50%;
+    -webkit-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
+  }
+  #canvasArea .buttons.game .space {
+    bottom: -3rem;
+    padding: 0 2.5rem;
+    left: 30%;
+  }
+  #canvasArea canvas {
+    -ms-flex-preferred-size: 60%;
+        flex-basis: 60%;
+    padding: 0 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 400px) and (max-height: 280px) {
+  html {
+    color: red;
+  }
+  #obrazek h1 {
+    font-size: 3.5rem;
+  }
+  #menuu {
+    height: 70%;
+  }
+  #menuu #pkt li {
+    list-style: none;
+    margin-top: 0.7rem;
+    font-size: 1rem;
+  }
+  #markGame {
+    position: absolute;
+    top: 3rem;
+    -webkit-transform: translate(20%, -40%);
+            transform: translate(20%, -40%);
+  }
+  #markGame div {
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+  }
+  #canvasArea .buttons.game {
+    -ms-flex-preferred-size: 30%;
+        flex-basis: 30%;
+    padding: 0 0 2rem 0;
+  }
+  #canvasArea .buttons.game .controler .up,
+  #canvasArea .buttons.game .controler .down,
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  #canvasArea .buttons.game .controler .up {
+    top: 0;
+  }
+  #canvasArea .buttons.game .controler .left {
+    left: 50%;
+    -webkit-transform: translate(-150%, -50%);
+            transform: translate(-150%, -50%);
+  }
+  #canvasArea .buttons.game .controler .right {
+    left: 50%;
+    -webkit-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
+  }
+  #canvasArea .buttons.game .space {
+    padding: 0 1rem;
+    left: 25%;
+  }
+  #canvasArea canvas {
+    -ms-flex-preferred-size: 70%;
+        flex-basis: 70%;
+    padding: 0 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 350px) and (max-height: 280px) {
+  html {
+    color: blue;
+  }
+  #obrazek h1 {
+    font-size: 3.5rem;
+  }
+  #menuu {
+    height: 70%;
+  }
+  #menuu #pkt li {
+    list-style: none;
+    margin-top: 0.7rem;
+    font-size: 1rem;
+  }
+  #markGame {
+    position: absolute;
+    top: 3rem;
     -webkit-transform: translate(10%, -40%);
             transform: translate(10%, -40%);
   }
   #markGame div {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-right: 1.5rem;
   }
-  #canvasArea {
-    bottom: 2rem;
-    left: 2rem;
+  #canvasArea .buttons.game {
+    -ms-flex-preferred-size: 30%;
+        flex-basis: 30%;
+    padding: 0 0 2rem 0;
   }
-  .buttons.game {
-    -ms-flex-preferred-size: 40%;
-        flex-basis: 40%;
-  }
-  canvas {
-    -ms-flex-preferred-size: 60%;
-        flex-basis: 60%;
-  }
-  .up,
-  .down,
-  .left,
-  .right {
+  #canvasArea .buttons.game .controler .up,
+  #canvasArea .buttons.game .controler .down,
+  #canvasArea .buttons.game .controler .left,
+  #canvasArea .buttons.game .controler .right {
     width: 1.5rem;
     height: 1.5rem;
   }
-  .left {
-    -webkit-transform: translate(-170%, -50%);
-            transform: translate(-170%, -50%);
+  #canvasArea .buttons.game .controler .up {
+    top: 0;
   }
-  .right {
-    -webkit-transform: translate(170%, -50%);
-            transform: translate(170%, -50%);
+  #canvasArea .buttons.game .controler .left {
+    left: 50%;
+    -webkit-transform: translate(-150%, -50%);
+            transform: translate(-150%, -50%);
+  }
+  #canvasArea .buttons.game .controler .right {
+    left: 50%;
+    -webkit-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
+  }
+  #canvasArea .buttons.game .space {
+    padding: 0 1rem;
+    left: 10%;
+  }
+  #canvasArea canvas {
+    -ms-flex-preferred-size: 70%;
+        flex-basis: 70%;
+    padding: 0 0 1rem 1rem;
   }
 }
 /*# sourceMappingURL=main.css.map */
